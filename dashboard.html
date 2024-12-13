@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaTrack Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fas fa-fish"></i>
+                <span>AquaTrack</span>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-tab="sensor-data">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Sensor Data</span>
+                </li>
+                <li data-tab="farm-records">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Farm Records</span>
+                </li>
+                <li data-tab="community">
+                    <i class="fas fa-users"></i>
+                    <span>Community Forum</span>
+                </li>
+                <li data-tab="analytics">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reports & Analytics</span>
+                </li>
+            </ul>
+            <div class="user-profile">
+                <img src="https://via.placeholder.com/40" alt="User Profile">
+                <div class="user-info">
+                    <h4>John Smith</h4>
+                    <p>Farm Manager</p>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="header-actions">
+                    <i class="fas fa-bell"></i>
+                    <i class="fas fa-cog"></i>
+                </div>
+            </header>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Sensor Data Tab -->
+                <div class="tab-pane active" id="sensor-data">
+                    <h2>Real-Time Sensor Data</h2>
+                    <div class="sensor-grid">
+                        <div class="sensor-card">
+                            <div class="sensor-icon">
+                                <i class="fas fa-temperature-high"></i>
+                            </div>
+                            <div class="sensor-info">
+                                <h3>Water Temperature</h3>
+                                <p class="value">24.5°C</p>
+                                <p class="trend positive">↑ 0.5°C from last hour</p>
+                            </div>
+                        </div>
+                        <div class="sensor-card">
+                            <div class="sensor-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div class="sensor-info">
+                                <h3>Dissolved Oxygen</h3>
+                                <p class="value">6.8 mg/L</p>
+                                <p class="trend negative">↓ 0.2 mg/L from last hour</p>
+                            </div>
+                        </div>
+                        <div class="sensor-card">
+                            <div class="sensor-icon">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                            <div class="sensor-info">
+                                <h3>pH Level</h3>
+                                <p class="value">7.2</p>
+                                <p class="trend stable">← Stable</p>
+                            </div>
+                        </div>
+                        <div class="sensor-card">
+                            <div class="sensor-icon">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <div class="sensor-info">
+                                <h3>Turbidity</h3>
+                                <p class="value">12 NTU</p>
+                                <p class="trend positive">↑ Improving</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Farm Records Tab -->
+                <div class="tab-pane" id="farm-records">
+                    <h2>Farm Records</h2>
+                    <div class="records-container">
+                        <div class="record-filters">
+                            <select>
+                                <option>All Ponds</option>
+                                <option>Pond A</option>
+                                <option>Pond B</option>
+                                <option>Pond C</option>
+                            </select>
+                            <input type="date" value="2024-12-13">
+                        </div>
+                        <table class="records-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Pond</th>
+                                    <th>Species</th>
+                                    <th>Feed Amount (kg)</th>
+                                    <th>Mortality</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2024-12-13</td>
+                                    <td>Pond A</td>
+                                    <td>Tilapia</td>
+                                    <td>25.5</td>
+                                    <td>2</td>
+                                    <td><i class="fas fa-edit"></i> <i class="fas fa-trash"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>2024-12-12</td>
+                                    <td>Pond B</td>
+                                    <td>Catfish</td>
+                                    <td>30.0</td>
+                                    <td>0</td>
+                                    <td><i class="fas fa-edit"></i> <i class="fas fa-trash"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Community Forum Tab -->
+                <div class="tab-pane" id="community">
+                    <h2>Community Forum</h2>
+                    <div class="forum-container">
+                        <div class="post-composer">
+                            <textarea placeholder="Share your thoughts or ask a question..."></textarea>
+                            <button class="post-btn">Post</button>
+                        </div>
+                        <div class="forum-posts">
+                            <div class="forum-post">
+                                <div class="post-header">
+                                    <img src="https://via.placeholder.com/30" alt="User">
+                                    <div class="post-info">
+                                        <h4>Sarah Johnson</h4>
+                                        <span>2 hours ago</span>
+                                    </div>
+                                </div>
+                                <p class="post-content">Has anyone experienced sudden pH fluctuations in their tilapia ponds? Looking for advice on stabilization methods.</p>
+                                <div class="post-actions">
+                                    <span><i class="fas fa-heart"></i> 12</span>
+                                    <span><i class="fas fa-comment"></i> 5</span>
+                                    <span><i class="fas fa-share"></i> Share</span>
+                                </div>
+                            </div>
+                            <div class="forum-post">
+                                <div class="post-header">
+                                    <img src="https://via.placeholder.com/30" alt="User">
+                                    <div class="post-info">
+                                        <h4>Mike Chen</h4>
+                                        <span>5 hours ago</span>
+                                    </div>
+                                </div>
+                                <p class="post-content">Just installed the new oxygen monitoring system. Amazing results so far! Happy to share my experience.</p>
+                                <div class="post-actions">
+                                    <span><i class="fas fa-heart"></i> 24</span>
+                                    <span><i class="fas fa-comment"></i> 8</span>
+                                    <span><i class="fas fa-share"></i> Share</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Tab -->
+                <div class="tab-pane" id="analytics">
+                    <h2>Reports & Analytics</h2>
+                    <div class="analytics-container">
+                        <div class="analytics-cards">
+                            <div class="analytics-card">
+                                <h3>Production Overview</h3>
+                                <div class="chart-placeholder">
+                                    <div class="chart-bar" style="height: 60%"></div>
+                                    <div class="chart-bar" style="height: 80%"></div>
+                                    <div class="chart-bar" style="height: 40%"></div>
+                                    <div class="chart-bar" style="height: 90%"></div>
+                                </div>
+                                <p>Monthly harvest comparison</p>
+                            </div>
+                            <div class="analytics-card">
+                                <h3>Feed Conversion Ratio</h3>
+                                <div class="metric-circle">
+                                    <span>1.6</span>
+                                </div>
+                                <p>Average FCR last 30 days</p>
+                            </div>
+                            <div class="analytics-card">
+                                <h3>Growth Rate</h3>
+                                <div class="chart-placeholder line-chart">
+                                    <div class="line"></div>
+                                </div>
+                                <p>Daily growth tracking</p>
+                            </div>
+                        </div>
+                        <div class="report-summary">
+                            <h3>Key Insights</h3>
+                            <ul>
+                                <li>Harvest yield increased by 15% compared to last month</li>
+                                <li>Feed efficiency improved by 8% after new feeding protocol</li>
+                                <li>Water quality parameters maintained optimal levels 95% of the time</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
