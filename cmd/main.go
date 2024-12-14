@@ -39,8 +39,12 @@ func Router() http.Handler {
 	mux := http.NewServeMux()
 
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/dashboard", func(w http.ResponseWriter, r *http.Request) {
 		RenderTemplates(w, "dashboard.html", nil)
+
+	})
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "index.html", nil)
 	})
 	mux.HandleFunc("/farms", func(w http.ResponseWriter, r *http.Request) {
 		RenderTemplates(w, "farms.html", nil)

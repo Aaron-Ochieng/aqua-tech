@@ -1,6 +1,7 @@
 <html><head><base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AquaIoT - Dashboard</title>
+<link rel="stylesheet" href="../static/css/dashboard..css">
 <style>
 * {
   margin: 0;
@@ -24,243 +25,7 @@ body {
   background: #f0f2f5;
 }
 
-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 1000;
-}
 
-.search-container {
-  flex: 1;
-  max-width: 500px;
-  margin: 0 2rem;
-}
-
-.search-bar {
-  width: 100%;
-  padding: 0.8rem 1.5rem;
-  border: 1px solid #ddd;
-  border-radius: 25px;
-  outline: none;
-  font-size: 0.9rem;
-  transition: all 0.3s;
-}
-
-.search-bar:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(0,136,204,0.2);
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 1.5rem;
-  color: var(--primary);
-  text-decoration: none;
-}
-
-.sidebar {
-  position: fixed;
-  left: 0;
-  top: 70px;
-  height: calc(100vh - 70px);
-  width: 250px;
-  background: white;
-  padding: 2rem;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-  overflow-y: auto;
-}
-
-.sidebar-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.menu-section {
-  margin-bottom: 1.5rem;
-}
-
-.menu-section-title {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  color: #666;
-  margin-bottom: 0.5rem;
-  padding-left: 0.8rem;
-}
-
-.menu-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.8rem;
-  border-radius: 8px;
-  color: var(--dark);
-  text-decoration: none;
-  transition: all 0.3s;
-}
-
-.menu-item:hover {
-  background: var(--light);
-  color: var(--primary);
-}
-
-.menu-item.active {
-  background: var(--primary);
-  color: white;
-}
-
-.main-content {
-  margin-left: 250px;
-  margin-top: 70px;
-  padding: 2rem;
-}
-
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
-
-.card {
-  background: white;
-  border-radius: 15px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.metric-card {
-  text-align: center;
-}
-
-.metric-value {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: var(--primary);
-  margin: 1rem 0;
-}
-
-.metric-label {
-  color: var(--dark);
-  font-weight: 500;
-}
-
-.chart-card {
-  grid-column: span 2;
-  min-height: 300px;
-}
-
-.status-indicator {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin-right: 8px;
-}
-
-.status-good { background: var(--success); }
-.status-warning { background: var(--warning); }
-.status-error { background: var(--danger); }
-
-.user-profile {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.user-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--primary);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-
-.notifications {
-  position: relative;
-  cursor: pointer;
-}
-
-.notification-badge {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background: var(--accent);
-  color: white;
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.notifications-card {
-  background: white;
-  padding: 1.5rem;
-}
-
-.notification-list {
-  margin-top: 1rem;
-}
-
-.notification-item {
-  display: flex;
-  align-items: start;
-  padding: 1rem;
-  border-bottom: 1px solid #eee;
-  gap: 1rem;
-}
-
-.notification-item:last-child {
-  border-bottom: none;
-}
-
-.notification-icon {
-  font-size: 1.5rem;
-}
-
-.notification-content {
-  flex: 1;
-}
-
-.notification-title {
-  font-weight: 600;
-  color: var(--dark);
-}
-
-.notification-details {
-  color: #666;
-  margin: 0.2rem 0;
-}
-
-.notification-time {
-  font-size: 0.8rem;
-  color: #999;
-}
-
-.alert-card .metric-value {
-  color: var(--danger);
-}
-
-@media (max-width: 1200px) {
-  .chart-card {
-    grid-column: 1 / -1;
-  }
-}
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -312,7 +77,7 @@ nav {
           </svg>
           Farms
         </a>
-        <a href="https://aquaiot.com/sensors" class="menu-item">
+        <a href="/sensors" class="menu-item">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="3"></circle>
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
@@ -323,7 +88,7 @@ nav {
 
       <div class="menu-section">
         <div class="menu-section-title">Data &amp; Analysis</div>
-        <a href="https://aquaiot.com/manual-data" class="menu-item">
+        <a href="/manual-data" class="menu-item">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
             <polyline points="14 2 14 8 20 8"></polyline>
@@ -333,7 +98,7 @@ nav {
           </svg>
           Manual Data
         </a>
-        <a href="https://aquaiot.com/analysis" class="menu-item">
+        <a href="/analysis" class="menu-item">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="18" y1="20" x2="18" y2="10"></line>
             <line x1="12" y1="20" x2="12" y2="4"></line>
