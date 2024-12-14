@@ -1,0 +1,449 @@
+<html><head><base href="/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Features - AquaIoT Smart Fish Farm Management</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --primary: #0088cc;
+  --secondary: #00a8e8;
+  --accent: #ff6b6b;
+  --dark: #333;
+  --light: #f9f9f9;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+.cta-button {
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255,107,107,0.3);
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-input {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  width: 200px;
+}
+
+.feature-hero {
+  min-height: 60vh;
+  background: linear-gradient(135deg, rgba(0,88,155,0.97) 0%, rgba(0,168,232,0.97) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 2rem 4rem;
+}
+
+.feature-hero h1 {
+  font-size: 3.5rem;
+  color: white;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.feature-hero p {
+  font-size: 1.4rem;
+  color: rgba(255,255,255,0.9);
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.feature-section {
+  padding: 6rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-section:nth-child(odd) {
+  background: linear-gradient(135deg, rgba(245,250,255,0.97) 0%, rgba(230,240,255,0.97) 100%);
+}
+
+.feature-section:nth-child(even) {
+  background: white;
+}
+
+.feature-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.feature-content {
+  padding: 2rem;
+}
+
+.feature-content h2 {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+.feature-content p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.feature-visual {
+  position: relative;
+  min-height: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  background: white;
+}
+
+.dashboard-mock {
+  padding: 2rem;
+}
+
+.data-chart {
+  width: 100%;
+  height: 300px;
+  margin-top: 1rem;
+}
+
+.metric-card {
+  background: rgba(0,136,204,0.1);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.metric-value {
+  font-size: 2rem;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.community-thread {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.product-card {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.features-cta {
+  text-align: center;
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, rgba(0,88,155,0.97) 0%, rgba(0,168,232,0.97) 100%);
+  color: white;
+}
+
+.features-cta h2 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .feature-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .feature-visual {
+    min-height: 300px;
+  }
+}
+</style>
+</head>
+<body>
+  <nav>
+    <a href="https://aquaiot.com" class="logo">
+      <svg width="32" height="32" viewBox="0 0 32 32">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="#0088cc" stroke-width="2"/>
+        <path d="M16 8 C12 8 8 12 8 16 C8 20 12 24 16 24 C20 24 24 20 24 16" fill="none" stroke="#0088cc" stroke-width="2"/>
+        <circle cx="16" cy="16" r="4" fill="#0088cc"/>
+      </svg>
+      AquaIoT
+    </a>
+    <div class="nav-links">
+      <a href="https://aquaiot.com">Home</a>
+      <a href="https://aquaiot.com/features">Features</a>
+      <a href="https://aquaiot.com/about">About Us</a>
+      <a href="https://aquaiot.com/contact">Contact</a>
+      <div class="search-container">
+        <input type="search" class="search-input" placeholder="Search...">
+      </div>
+      <button class="cta-button">Login / Sign Up</button>
+    </div>
+  </nav>
+
+  <section class="feature-hero">
+    <div class="animated-bg">
+      <svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+        <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+          <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#grid)">
+          <animate attributeName="opacity" values="0.3;0.6;0.3" dur="10s" repeatCount="indefinite"/>
+        </rect>
+        <g class="fish-group">
+          <path d="M30,15 Q40,15 50,15 T70,15 L80,10 L70,15 L80,20 L70,15" fill="rgba(255,255,255,0.6)">
+            <animateMotion path="M0,0 Q400,50 800,0 T0,0" dur="20s" repeatCount="indefinite"/>
+          </path>
+        </g>
+        <circle cx="200" cy="200" r="5" fill="rgba(255,255,255,0.8)">
+          <animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="600" cy="400" r="5" fill="rgba(255,255,255,0.8)">
+          <animate attributeName="r" values="5;8;5" dur="2.5s" repeatCount="indefinite"/>
+        </circle>
+        <g stroke="rgba(255,255,255,0.4)" stroke-width="2">
+          <path d="M200,200 Q400,100 600,400" fill="none">
+            <animate attributeName="stroke-dasharray" values="0,1000;1000,0" dur="5s" repeatCount="indefinite"/>
+          </path>
+        </g>
+        <g class="bubbles">
+          <circle cx="300" cy="500" r="3" fill="rgba(255,255,255,0.5)">
+            <animate attributeName="cy" values="500;0" dur="10s" repeatCount="indefinite"/>
+            <animate attributeName="cx" values="300;310;300" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="500" cy="800" r="2" fill="rgba(255,255,255,0.5)">
+            <animate attributeName="cy" values="800;0" dur="15s" repeatCount="indefinite"/>
+            <animate attributeName="cx" values="500;510;500" dur="4s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+      </svg>
+    </div>
+    <div class="hero-content">
+      <h1>Powerful Features for Modern Fish Farming</h1>
+      <p>Discover how our smart technology can transform your aquaculture operations</p>
+    </div>
+  </section>
+
+  <section class="feature-section">
+    <div class="feature-container">
+      <div class="feature-content">
+        <h2>Real-time Sensor Monitoring</h2>
+        <p>Get live updates from your sensors to monitor water conditions like temperature, pH, and oxygen levels.</p>
+        <div class="feature-metrics">
+          <div class="metric-card">
+            <div class="metric-value">7.2</div>
+            <div>pH Level</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">24.5°C</div>
+            <div>Temperature</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">6.8mg/L</div>
+            <div>Dissolved Oxygen</div>
+          </div>
+        </div>
+      </div>
+      <div class="feature-visual dashboard-mock">
+        <!-- Add interactive dashboard SVG animation here -->
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section">
+    <div class="feature-container">
+      <div class="feature-content">
+        <h2>Automated Feeding & Management</h2>
+        <p>Streamline operations with smart automation systems for feeding and pond management.</p>
+      </div>
+      <div class="feature-visual dashboard-mock">
+        <!-- Add automated feeding system SVG animation here -->
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section">
+    <div class="feature-container">
+      <div class="feature-content">
+        <h2>Custom Data Entry</h2>
+        <p>Flexibility to input additional metrics and create custom labels for comprehensive tracking.</p>
+      </div>
+      <div class="feature-visual dashboard-mock">
+        <!-- Add custom data entry SVG animation here -->
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section">
+    <div class="feature-container">
+      <div class="feature-content">
+        <h2>Advanced Analytics</h2>
+        <p>Make data-driven decisions with comprehensive analytics and interactive visualizations.</p>
+      </div>
+      <div class="feature-visual dashboard-mock">
+        <!-- Add analytics SVG animation here -->
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section">
+    <div class="feature-container">
+      <div class="feature-content">
+        <h2>Community & Marketplace</h2>
+        <p>Connect with fellow farmers and access a comprehensive marketplace for supplies.</p>
+      </div>
+      <div class="feature-visual dashboard-mock">
+        <!-- Add community marketplace SVG animation here -->
+      </div>
+    </div>
+  </section>
+
+  <section class="features-cta">
+    <h2>Ready to transform your fish farming?</h2>
+    <button class="primary-cta">Sign Up Now</button>
+  </section>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul class="footer-links">
+        <li><a href="https://aquaiot.com/dashboard">Dashboard</a></li>
+        <li><a href="https://aquaiot.com/marketplace">E-commerce</a></li>
+        <li><a href="https://aquaiot.com/community">Community</a></li>
+        <li><a href="https://aquaiot.com/resources">Educational Resources</a></li>
+        <li><a href="https://aquaiot.com/privacy">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Connect With Us</h3>
+      <div class="social-links">
+        <a href="https://facebook.com/aquaiot" aria-label="Facebook">
+          <svg class="social-icon" viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="none" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </a>
+        <a href="https://twitter.com/aquaiot" aria-label="Twitter">
+          <svg class="social-icon" viewBox="0 0 24 24">
+            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" fill="none" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </a>
+        <a href="https://instagram.com/aquaiot" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="17" cy="7" r="1" fill="currentColor"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-section">
+      <h3>Contact Us</h3>
+      <div class="contact-info">
+        <p>Email: support@aquasmart.com</p>
+        <p>Phone: +254-700-123456</p>
+        <p>Working Hours: Mon-Fri, 8am-5pm EAT</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2023 AquaIoT. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+// Add interactive animations and functionality for feature demonstrations
+
+// Dashboard mock data visualization
+const createDashboardMock = () => {
+  const ctx = document.createElement('canvas');
+  ctx.className = 'data-chart';
+  document.querySelector('.dashboard-mock').appendChild(ctx);
+  
+  // Add chart.js or similar library for live data visualization
+};
+
+// Automated feeding system animation
+const createFeedingAnimation = () => {
+  // Add SVG animation showing automated feeding process
+};
+
+// Initialize features
+document.addEventListener('DOMContentLoaded', () => {
+  createDashboardMock();
+  createFeedingAnimation();
+  
+  // Add more interactive elements
+});
+</script>
+</body>
+</html>

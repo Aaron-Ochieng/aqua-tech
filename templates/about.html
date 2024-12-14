@@ -1,0 +1,1291 @@
+<html><head><base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaIoT - Smart Fish Farm Management</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --primary: #0088cc;
+  --secondary: #00a8e8;
+  --accent: #ff6b6b;
+  --dark: #333;
+  --light: #f9f9f9;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+.cta-button {
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255,107,107,0.3);
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-input {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  width: 200px;
+}
+
+.hero {
+  margin-top: 70px;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(0,88,155,0.95) 0%, rgba(0,168,232,0.95) 100%);
+}
+
+.hero-content {
+  text-align: center;
+  padding: 2rem;
+  z-index: 2;
+  color: white;
+}
+
+.hero h1 {
+  font-size: 3.2rem;
+  color: white;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.hero p {
+  font-size: 1.3rem;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 2.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.animated-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.hero .cta-button {
+  background: var(--accent);
+  font-size: 1.1rem;
+  padding: 0.8rem 2rem;
+}
+
+.hero .secondary-button {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 2px solid rgba(255,255,255,0.3);
+  font-size: 1.1rem;
+  padding: 0.8rem 2rem;
+}
+
+.hero .secondary-button:hover {
+  background: rgba(255,255,255,0.25);
+  border-color: rgba(255,255,255,0.5);
+}
+
+.features {
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, rgba(245,250,255,0.98) 0%, rgba(230,240,255,0.98) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.features::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L55 45H5L30 5z' stroke='rgba(0,136,204,0.1)' fill='none'/%3E%3C/svg%3E") repeat;
+  opacity: 0.5;
+  animation: floatBg 20s linear infinite;
+}
+
+.features-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--dark);
+  margin-bottom: 3rem;
+}
+
+.feature-detailed-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.feature-detailed-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.feature-content {
+  padding: 2.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.sensor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.dashboard-preview,
+.automation-preview,
+.form-preview,
+.analysis-preview,
+.community-preview,
+.marketplace-preview {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.feature-hero {
+  background: linear-gradient(135deg, rgba(0,88,155,0.98) 0%, rgba(0,168,232,0.98) 100%);
+  padding: 6rem 2rem;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);
+  animation: shimmer 10s linear infinite;
+}
+
+.feature-hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.chart-container {
+  max-width: 100%;
+  height: auto;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+@media (max-width: 768px) {
+  .feature-detailed-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .feature-hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .sensor-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-detailed-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.dashboard-preview:hover,
+.automation-preview:hover,
+.form-preview:hover,
+.analysis-preview:hover,
+.community-preview:hover,
+.marketplace-preview:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feature-detailed-card {
+  animation: fadeIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.feature-detailed-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-detailed-card:nth-child(2) { animation-delay: 0.2s; }
+.feature-detailed-card:nth-child(3) { animation-delay: 0.3s; }
+.feature-detailed-card:nth-child(4) { animation-delay: 0.4s; }
+.feature-detailed-card:nth-child(5) { animation-delay: 0.5s; }
+.feature-detailed-card:nth-child(6) { animation-delay: 0.6s; }
+
+.footer {
+  background: linear-gradient(135deg, rgba(51,51,51,0.98) 0%, rgba(34,34,34,0.98) 100%);
+  padding: 4rem 2rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30m-25 0a25,25 0 1,0 50,0a25,25 0 1,0 -50,0' stroke='rgba(255,255,255,0.05)' fill='none'/%3E%3C/svg%3E") repeat;
+  opacity: 0.3;
+  animation: floatBg 30s linear infinite;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-section h3 {
+  color: var(--secondary);
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s, transform 0.3s;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: white;
+  transform: translateX(5px);
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  transition: all 0.3s;
+}
+
+.social-icon:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-3px);
+}
+
+.contact-info {
+  color: #ccc;
+  line-height: 1.8;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 3rem;
+  margin-top: 3rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: #999;
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .social-links {
+    justify-content: center;
+  }
+  
+  .footer-links a:hover {
+    transform: none;
+  }
+}
+
+.feature-details-page {
+  padding-top: 70px;
+}
+
+.feature-hero {
+  background: linear-gradient(135deg, rgba(0,88,155,0.98) 0%, rgba(0,168,232,0.98) 100%);
+  padding: 6rem 2rem;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.feature-detailed-cards {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.feature-detailed-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  margin-bottom: 3rem;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.feature-content {
+  padding: 2rem;
+}
+
+.feature-content h2 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.sensor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.sensor-card {
+  background: rgba(0,136,204,0.1);
+  padding: 1.5rem;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sensor-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.sensor-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.sensor-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.sensor-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.schedule-interface {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+}
+
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.add-schedule {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.schedule-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.form-preview {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+}
+
+.form-fields {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group input {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.features-cta {
+  background: linear-gradient(135deg, rgba(0,88,155,0.95) 0%, rgba(0,168,232,0.95) 100%);
+  padding: 4rem 2rem;
+  text-align: center;
+  color: white;
+  margin-top: 4rem;
+}
+
+.features-cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .feature-detailed-card {
+    margin: 1rem;
+  }
+  
+  .sensor-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.value-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.impact-card {
+  transition: transform 0.3s ease;
+}
+
+.impact-card:hover {
+  transform: translateY(-10px);
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .about-hero p {
+    font-size: 1.2rem;
+  }
+}
+</style>
+</head>
+<body>
+  <nav>
+    <a href="https://aquaiot.com" class="logo">
+      <svg width="32" height="32" viewBox="0 0 32 32">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="#0088cc" stroke-width="2"></circle>
+        <path d="M16 8 C12 8 8 12 8 16 C8 20 12 24 16 24 C20 24 24 20 24 16" fill="none" stroke="#0088cc" stroke-width="2"></path>
+        <circle cx="16" cy="16" r="4" fill="#0088cc"></circle>
+      </svg>
+      AquaIoT
+    </a>
+    <div class="nav-links">
+      <a href="https://aquaiot.com">Home</a>
+      <a href="https://aquaiot.com/features">Features</a>
+      <a href="https://aquaiot.com/about">About Us</a>
+      <a href="https://aquaiot.com/contact">Contact</a>
+      <div class="search-container">
+        <input type="search" class="search-input" placeholder="Search...">
+      </div>
+      <button class="cta-button">Login / Sign Up</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="animated-bg">
+      <svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+        <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+          <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"></path>
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#grid)">
+          <animate attributeName="opacity" values="0.3;0.6;0.3" dur="10s" repeatCount="indefinite"></animate>
+        </rect>
+        <g class="fish-group">
+          <path d="M30,15 Q40,15 50,15 T70,15 L80,10 L70,15 L80,20 L70,15" fill="rgba(255,255,255,0.6)">
+            <animateMotion path="M0,0 Q400,50 800,0 T0,0" dur="20s" repeatCount="indefinite"></animateMotion>
+          </path>
+        </g>
+        <circle cx="200" cy="200" r="5" fill="rgba(255,255,255,0.8)">
+          <animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite"></animate>
+        </circle>
+        <circle cx="600" cy="400" r="5" fill="rgba(255,255,255,0.8)">
+          <animate attributeName="r" values="5;8;5" dur="2.5s" repeatCount="indefinite"></animate>
+        </circle>
+        <g stroke="rgba(255,255,255,0.4)" stroke-width="2">
+          <path d="M200,200 Q400,100 600,400" fill="none">
+            <animate attributeName="stroke-dasharray" values="0,1000;1000,0" dur="5s" repeatCount="indefinite"></animate>
+          </path>
+        </g>
+        <g class="bubbles">
+          <circle cx="300" cy="500" r="3" fill="rgba(255,255,255,0.5)">
+            <animate attributeName="cy" values="500;0" dur="10s" repeatCount="indefinite"></animate>
+            <animate attributeName="cx" values="300;310;300" dur="3s" repeatCount="indefinite"></animate>
+          </circle>
+          <circle cx="500" cy="800" r="2" fill="rgba(255,255,255,0.5)">
+            <animate attributeName="cy" values="800;0" dur="15s" repeatCount="indefinite"></animate>
+            <animate attributeName="cx" values="500;510;500" dur="4s" repeatCount="indefinite"></animate>
+          </circle>
+        </g>
+      </svg>
+    </div>
+    <div class="hero-content">
+      <h1>Empowering Fish Farmers with<br>Data-Driven Insights and Automation</h1>
+      <p>Manage your farms, sensors, and data efficiently with our intuitive platform.</p>
+      <div class="hero-buttons">
+        <button class="cta-button">Get Started</button>
+        <button class="secondary-button">Learn More</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-details-page">
+    <div class="feature-hero">
+      <h1>Powerful Features for Modern Fish Farming</h1>
+      <p>Discover how our comprehensive suite of tools can transform your aquaculture operations</p>
+    </div>
+
+    <div class="feature-detailed-cards">
+      <!-- Real-time Monitoring -->
+      <div class="feature-detailed-card">
+        <div class="feature-content">
+          <h2>Real-time Sensor Monitoring</h2>
+          <p>Get live updates from your sensors to monitor water conditions like temperature, pH, and oxygen levels.</p>
+          
+          <div class="dashboard-preview">
+            <div class="sensor-grid">
+              <div class="sensor-card">
+                <svg class="sensor-icon" viewBox="0 0 24 24">
+                  <path d="M12 2v6l4 2-4 2v10" stroke="var(--primary)" fill="none" stroke-width="2"></path>
+                  <circle cx="12" cy="12" r="10" stroke="var(--primary)" fill="none" stroke-width="2"></circle>
+                </svg>
+                <div class="sensor-data">
+                  <span class="sensor-label">Temperature</span>
+                  <span class="sensor-value">24.5°C</span>
+                </div>
+              </div>
+              
+              <div class="sensor-card">
+                <svg class="sensor-icon" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" stroke="var(--primary)" fill="none" stroke-width="2"></circle>
+                  <path d="M8 12h8M12 8v8" stroke="var(--primary)" stroke-width="2"></path>
+                  <text x="12" y="16" text-anchor="middle" fill="var(--primary)" font-size="6">pH</text>
+                </svg>
+                <div class="sensor-data">
+                  <span class="sensor-label">pH Level</span>
+                  <span class="sensor-value">7.2</span>
+                </div>
+              </div>
+
+              <div class="sensor-card">
+                <svg class="sensor-icon" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="var(--primary)"></path>
+                  <path d="M15 9l-6 6M9 9l6 6" stroke="white" stroke-width="2"></path>
+                </svg>
+                <div class="sensor-data">
+                  <span class="sensor-label">Oxygen</span>
+                  <span class="sensor-value">8.5 mg/L</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Automated Feeding -->
+      <div class="feature-detailed-card">
+        <div class="feature-content">
+          <h2>Automated Feeding &amp; Pond Management</h2>
+          <p>Set feeding schedules and control water levels with precision.</p>
+          
+          <div class="automation-preview">
+            <div class="schedule-interface">
+              <div class="schedule-header">
+                <h3>Feeding Schedule</h3>
+                <button class="add-schedule">+ Add New</button>
+              </div>
+              <div class="schedule-list">
+                <div class="schedule-item">
+                  <div class="time">08:00</div>
+                  <div class="amount">2.5 kg</div>
+                  <div class="status active">Active</div>
+                </div>
+                <div class="schedule-item">
+                  <div class="time">14:00</div>
+                  <div class="amount">2.0 kg</div>
+                  <div class="status active">Active</div>
+                </div>
+                <div class="schedule-item">
+                  <div class="time">18:00</div>
+                  <div class="amount">1.5 kg</div>
+                  <div class="status active">Active</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Manual Data Entry -->
+      <div class="feature-detailed-card">
+        <div class="feature-content">
+          <h2>Manual Data Entry</h2>
+          <p>Easily record and edit data for custom metrics.</p>
+          
+          <div class="form-preview">
+            <div class="form-header">
+              <h3>Add New Record</h3>
+            </div>
+            <div class="form-fields">
+              <div class="form-group">
+                <label>Metric Name</label>
+                <input type="text" placeholder="Enter metric name">
+              </div>
+              <div class="form-group">
+                <label>Value</label>
+                <input type="number" placeholder="Enter value">
+              </div>
+              <div class="form-group">
+                <label>Unit</label>
+                <input type="text" placeholder="Enter unit">
+              </div>
+              <button class="submit-btn">Save Record</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Analysis -->
+      <div class="feature-detailed-card">
+        <div class="feature-content">
+          <h2>Data Analysis Tools</h2>
+          <p>Interactive graphs and tables to track trends and make informed decisions.</p>
+          
+          <div class="analysis-preview">
+            <div class="chart-container">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+    <!-- Temperature Chart -->
+    <div style="background: white; border-radius: 10px; padding: 15px;">
+      <h4 style="margin-bottom: 10px; color: var(--primary);">Temperature Trends</h4>
+      <svg class="chart" viewBox="0 0 300 200" width="100%" height="150">
+        <!-- Axes -->
+        <line x1="40" y1="160" x2="280" y2="160" stroke="#333" stroke-width="1"></line>
+        <line x1="40" y1="20" x2="40" y2="160" stroke="#333" stroke-width="1"></line>
+        
+        <!-- Grid lines -->
+        <g style="stroke:#eee;stroke-width:1">
+          <line x1="40" y1="120" x2="280" y2="120"></line>
+          <line x1="40" y1="80" x2="280" y2="80"></line>
+          <line x1="40" y1="40" x2="280" y2="40"></line>
+          <line x1="100" y1="20" x2="100" y2="160"></line>
+          <line x1="160" y1="20" x2="160" y2="160"></line>
+          <line x1="220" y1="20" x2="220" y2="160"></line>
+        </g>
+
+        <!-- Data line -->
+        <path d="M40,120 L100,100 L160,140 L220,80 L280,60" fill="none" stroke="var(--primary)" stroke-width="2"></path>
+        
+        <!-- Axis labels -->
+        <text x="35" y="40" text-anchor="end" font-size="10">30°C</text>
+        <text x="35" y="80" text-anchor="end" font-size="10">25°C</text>
+        <text x="35" y="120" text-anchor="end" font-size="10">20°C</text>
+        <text x="35" y="160" text-anchor="end" font-size="10">15°C</text>
+      </svg>
+    </div>
+
+    <!-- pH Levels Chart -->
+    <div style="background: white; border-radius: 10px; padding: 15px;">
+      <h4 style="margin-bottom: 10px; color: var(--primary);">pH Levels (24h)</h4>
+      <svg class="chart" viewBox="0 0 300 200" width="100%" height="150">
+        <!-- Axes -->
+        <line x1="40" y1="160" x2="280" y2="160" stroke="#333" stroke-width="1"></line>
+        <line x1="40" y1="20" x2="40" y2="160" stroke="#333" stroke-width="1"></line>
+        
+        <!-- Grid lines -->
+        <g style="stroke:#eee;stroke-width:1">
+          <line x1="40" y1="120" x2="280" y2="120"></line>
+          <line x1="40" y1="80" x2="280" y2="80"></line>
+          <line x1="40" y1="40" x2="280" y2="40"></line>
+        </g>
+
+        <!-- Data points -->
+        <path d="M40,80 L100,85 L160,75 L220,90 L280,80" fill="none" stroke="var(--accent)" stroke-width="2"></path>
+              
+        <!-- Axis labels -->
+        <text x="35" y="40" text-anchor="end" font-size="10">8.0</text>
+        <text x="35" y="80" text-anchor="end" font-size="10">7.0</text>
+        <text x="35" y="120" text-anchor="end" font-size="10">6.0</text>
+        <text x="35" y="160" text-anchor="end" font-size="10">5.0</text>
+      </svg>
+    </div>
+
+    <!-- Dissolved Oxygen Chart -->
+    <div style="background: white; border-radius: 10px; padding: 15px;">
+      <h4 style="margin-bottom: 10px; color: var(--primary);">Dissolved Oxygen (mg/L)</h4>
+      <svg class="chart" viewBox="0 0 300 200" width="100%" height="150">
+        <!-- Axes -->
+        <line x1="40" y1="160" x2="280" y2="160" stroke="#333" stroke-width="1"></line>
+        <line x1="40" y1="20" x2="40" y2="160" stroke="#333" stroke-width="1"></line>
+        
+        <!-- Grid lines -->
+        <g style="stroke:#eee;stroke-width:1">
+          <line x1="40" y1="120" x2="280" y2="120"></line>
+          <line x1="40" y1="80" x2="280" y2="80"></line>
+          <line x1="40" y1="40" x2="280" y2="40"></line>
+        </g>
+
+        <!-- Bar chart -->
+        <g>
+          <rect x="60" y="60" width="30" height="100" fill="#2ecc71"></rect>
+          <rect x="120" y="40" width="30" height="120" fill="#2ecc71"></rect>
+          <rect x="180" y="80" width="30" height="80" fill="#2ecc71"></rect>
+          <rect x="240" y="50" width="30" height="110" fill="#2ecc71"></rect>
+        </g>
+        
+        <!-- Axis labels -->
+        <text x="35" y="40" text-anchor="end" font-size="10">10.0</text>
+        <text x="35" y="80" text-anchor="end" font-size="10">7.5</text>
+        <text x="35" y="120" text-anchor="end" font-size="10">5.0</text>
+        <text x="35" y="160" text-anchor="end" font-size="10">2.5</text>
+      </svg>
+    </div>
+
+    <!-- Water Quality Index -->
+    <div style="background: white; border-radius: 10px; padding: 15px;">
+      <h4 style="margin-bottom: 10px; color: var(--primary);">Water Quality Index</h4>
+      <svg class="chart" viewBox="0 0 300 200" width="100%" height="150">
+        <!-- Circular gauge -->
+        <g transform="translate(150,100)">
+          <!-- Background circle -->
+          <circle cx="0" cy="0" r="80" fill="none" stroke="#eee" stroke-width="20"></circle>
+          
+          <!-- Value arc -->
+          <path d="M-69.28,-40a80,80 0 0,1 138.56,0" fill="none" stroke="#3498db" stroke-width="20" stroke-linecap="round"></path>
+          
+          <!-- Center text -->
+          <text x="0" y="10" text-anchor="middle" font-size="24" font-weight="bold">85%</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Community -->
+      <div class="feature-detailed-card">
+  <div class="feature-content" style="padding: 2rem;">
+    <h2 style="font-size: 1.8rem; color: #1a365d; margin-bottom: 1.5rem; border-bottom: 2px solid #2b6cb0; padding-bottom: 0.8rem;">
+      Community &amp; Knowledge Exchange
+    </h2>
+    <p style="font-size: 1.1rem; line-height: 1.6; color: #2d3748; margin-bottom: 2rem;">
+      Connect with experienced aquaculture professionals and access peer-reviewed knowledge resources to enhance your farming practices.
+    </p>
+    
+    <div class="community-preview" style="background: #f7fafc; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+      <div style="padding: 2rem;">
+        <!-- Forum Section -->
+        <div style="margin-bottom: 2rem;">
+          <h3 style="font-size: 1.3rem; color: #2b6cb0; margin-bottom: 1rem;">Latest Discussions</h3>
+          <div style="background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+            <!-- Discussion Thread 1 -->
+            <div style="padding: 1.5rem; border-bottom: 1px solid #e2e8f0; display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: center;">
+              <div style="width: 48px; height: 48px; background: #2b6cb0; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 style="font-size: 1.1rem; color: #2d3748; margin-bottom: 0.5rem;">Advanced Water Quality Management Techniques</h4>
+                <p style="color: #4a5568; font-size: 0.95rem;">Comprehensive discussion on maintaining optimal water parameters for maximum yield...</p>
+                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #718096;">
+                  Posted by Dr. James Chen • Aquaculture Specialist
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div style="color: #2b6cb0; font-weight: 600; margin-bottom: 0.3rem;">42 Responses</div>
+                <div style="color: #718096; font-size: 0.9rem;">Updated 2h ago</div>
+              </div>
+            </div>
+            
+            <!-- Discussion Thread 2 -->
+            <div style="padding: 1.5rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: center;">
+              <div style="width: 48px; height: 48px; background: #2b6cb0; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 style="font-size: 1.1rem; color: #2d3748; margin-bottom: 0.5rem;">Research: Impact of Automated Feeding Systems</h4>
+                <p style="color: #4a5568; font-size: 0.95rem;">Latest findings on efficiency improvements and ROI analysis...</p>
+                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #718096;">
+                  Posted by Maria Rodriguez • Research Director
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div style="color: #2b6cb0; font-weight: 600; margin-bottom: 0.3rem;">28 Responses</div>
+                <div style="color: #718096; font-size: 0.9rem;">Updated 6h ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+          <button style="background: #2b6cb0; color: white; padding: 0.8rem 1.5rem; border-radius: 6px; border: none; font-weight: 500; cursor: pointer;">Start New Discussion</button>
+          <button style="background: white; color: #2b6cb0; padding: 0.8rem 1.5rem; border-radius: 6px; border: 1px solid #2b6cb0; font-weight: 500; cursor: pointer;">Browse All Topics</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <!-- E-commerce -->
+      <div class="feature-detailed-card">
+        <div class="feature-content">
+  <h2 style="font-size: 1.8rem; color: #003366; margin-bottom: 1.5rem; font-weight: 600; border-bottom: 3px solid #0088cc; padding-bottom: 0.5rem;">E-commerce Integration</h2>
+  <p style="font-size: 1.1rem; line-height: 1.6; color: #445566; margin-bottom: 2rem; font-weight: 400;">
+    Access a comprehensive marketplace for all your aquaculture needs. Source high-quality equipment, feed, and supplies from verified vendors with secure transactions and reliable delivery.
+  </p>
+  
+  <div class="marketplace-preview" style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+    <div class="product-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+      <div class="product-card" style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+        <div class="product-image" style="background: #f1f3f5; height: 160px; border-radius: 6px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#0088cc" stroke-width="1.5">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <path d="M3.3 7l8.7 5 8.7-5"></path>
+            <path d="M12 22V12"></path>
+          </svg>
+        </div>
+        <h4 style="font-size: 1.1rem; color: #003366; margin-bottom: 0.5rem; font-weight: 600;">Professional Fish Feed</h4>
+        <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.4;">High-protein formula optimized for rapid growth and health</p>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="price" style="font-size: 1.2rem; color: #0088cc; font-weight: 600;">$49.99</span>
+          <button style="background: #0088cc; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: 500;">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <div class="features-cta">
+      <h2>Ready to transform your fish farming?</h2>
+      <button class="cta-button">Sign Up Now</button>
+    </div>
+  </section>
+
+<section class="about-hero" style="margin-top: 70px; background: linear-gradient(135deg, rgba(0,88,155,0.98) 0%, rgba(0,168,232,0.98) 100%); padding: 6rem 2rem; text-align: center; color: white; position: relative;">
+  <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem;">Our Mission</h1>
+  <p style="font-size: 1.5rem; max-width: 800px; margin: 0 auto; line-height: 1.6;">To revolutionize fish farming through innovation, data-driven insights, and a supportive community.</p>
+</section>
+
+<section class="our-story" style="padding: 5rem 2rem; background: #f8f9fa;">
+  <div class="content-wrapper" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+    <div class="story-content">
+      <h2 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 2rem;">Our Story</h2>
+      <p style="font-size: 1.2rem; line-height: 1.8; color: #444;">Founded in 2024, we are a team of passionate technologists and aquaculture experts committed to empowering farmers worldwide.</p>
+    </div>
+    <div class="team-visual" style="background: #fff; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      <!-- Team visualization using SVG -->
+      <svg viewBox="0 0 400 300" style="width: 100%; height: auto;">
+        <defs>
+          <pattern id="team-pattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+            <path d="M25,0 L50,25 L25,50 L0,25 Z" fill="none" stroke="rgba(0,136,204,0.1)"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#team-pattern)"/>
+        <!-- Team member representations -->
+        <g transform="translate(50,100)">
+          <circle cx="60" cy="60" r="40" fill="#0088cc"/>
+          <circle cx="160" cy="60" r="40" fill="#00a8e8"/>
+          <circle cx="260" cy="60" r="40" fill="#0088cc"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="core-values" style="padding: 5rem 2rem; background: white;">
+  <h2 style="text-align: center; font-size: 2.5rem; color: var(--primary); margin-bottom: 4rem;">Core Values</h2>
+  <div class="values-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+    <!-- Innovation -->
+    <div class="value-card" style="background: #f8f9fa; padding: 2rem; border-radius: 15px; text-align: center; transition: transform 0.3s;">
+      <svg viewBox="0 0 24 24" style="width: 60px; height: 60px; margin-bottom: 1rem;">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="#0088cc" stroke-width="2"/>
+      </svg>
+      <h3 style="color: var(--primary); margin-bottom: 1rem;">Innovation</h3>
+    </div>
+    <!-- Collaboration -->
+    <div class="value-card" style="background: #f8f9fa; padding: 2rem; border-radius: 15px; text-align: center; transition: transform 0.3s;">
+      <svg viewBox="0 0 24 24" style="width: 60px; height: 60px; margin-bottom: 1rem;">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" fill="none" stroke="#0088cc" stroke-width="2"/>
+        <circle cx="9" cy="7" r="4" fill="none" stroke="#0088cc" stroke-width="2"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" fill="none" stroke="#0088cc" stroke-width="2"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" fill="none" stroke="#0088cc" stroke-width="2"/>
+      </svg>
+      <h3 style="color: var(--primary); margin-bottom: 1rem;">Collaboration</h3>
+    </div>
+    <!-- Sustainability -->
+    <div class="value-card" style="background: #f8f9fa; padding: 2rem; border-radius: 15px; text-align: center; transition: transform 0.3s;">
+      <svg viewBox="0 0 24 24" style="width: 60px; height: 60px; margin-bottom: 1rem;">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="#0088cc" stroke-width="2"/>
+      </svg>
+      <h3 style="color: var(--primary); margin-bottom: 1rem;">Sustainability</h3>
+    </div>
+    <!-- Farmer-Centric -->
+    <div class="value-card" style="background: #f8f9fa; padding: 2rem; border-radius: 15px; text-align: center; transition: transform 0.3s;">
+      <svg viewBox="0 0 24 24" style="width: 60px; height: 60px; margin-bottom: 1rem;">
+        <circle cx="12" cy="12" r="10" fill="none" stroke="#0088cc" stroke-width="2"/>
+        <path d="M12 16v-4M12 8h.01" stroke="#0088cc" stroke-width="2"/>
+      </svg>
+      <h3 style="color: var(--primary); margin-bottom: 1rem;">Farmer-Centric Design</h3>
+    </div>
+  </div>
+</section>
+
+<section class="impact" style="padding: 5rem 2rem; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+  <h2 style="text-align: center; font-size: 2.5rem; color: var(--primary); margin-bottom: 4rem;">Our Impact</h2>
+  <div class="impact-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
+    <!-- Farmers -->
+    <div class="impact-card" style="background: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      <h3 style="font-size: 3rem; color: var(--primary); margin-bottom: 0.5rem;">500+</h3>
+      <p style="color: #666;">Farmers Supported</p>
+    </div>
+    <!-- Fish -->
+    <div class="impact-card" style="background: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      <h3 style="font-size: 3rem; color: var(--primary); margin-bottom: 0.5rem;">100K+</h3>
+      <p style="color: #666;">Fish Monitored</p>
+    </div>
+    <!-- Countries -->
+    <div class="impact-card" style="background: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      <h3 style="font-size: 3rem; color: var(--primary); margin-bottom: 0.5rem;">10+</h3>
+      <p style="color: #666;">Countries Served</p>
+    </div>
+  </div>
+</section>
+
+<section class="about-cta" style="padding: 5rem 2rem; background: linear-gradient(135deg, rgba(0,88,155,0.98) 0%, rgba(0,168,232,0.98) 100%); text-align: center; color: white;">
+  <h2 style="font-size: 2.8rem; margin-bottom: 2rem;">Join Us in Shaping the Future of Aquaculture</h2>
+  <button class="cta-button" style="font-size: 1.2rem; padding: 1rem 3rem;">Get Started</button>
+</section>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul class="footer-links">
+        <li><a href="https://aquaiot.com/dashboard">Dashboard</a></li>
+        <li><a href="https://aquaiot.com/marketplace">E-commerce</a></li>
+        <li><a href="https://aquaiot.com/community">Community</a></li>
+        <li><a href="https://aquaiot.com/resources">Educational Resources</a></li>
+        <li><a href="https://aquaiot.com/privacy">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Connect With Us</h3>
+      <div class="social-links">
+        <a href="https://facebook.com/aquaiot" aria-label="Facebook">
+          <svg class="social-icon" viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="none" stroke="currentColor" stroke-width="2"></path>
+          </svg>
+        </a>
+        <a href="https://twitter.com/aquaiot" aria-label="Twitter">
+          <svg class="social-icon" viewBox="0 0 24 24">
+            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" fill="none" stroke="currentColor" stroke-width="2"></path>
+          </svg>
+        </a>
+        <a href="https://instagram.com/aquaiot" aria-label="Instagram">
+          <svg class="social-icon" viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"></rect>
+            <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+            <circle cx="17" cy="7" r="1" fill="currentColor"></circle>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-section">
+      <h3>Contact Us</h3>
+      <div class="contact-info">
+        <p>Email: support@aquasmart.com</p>
+        <p>Phone: +254-700-123456</p>
+        <p>Working Hours: Mon-Fri, 8am-5pm EAT</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2023 AquaIoT. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.secondary-button').addEventListener('click', () => {
+  const featuresSection = document.querySelector('#features');
+  if (featuresSection) {
+    featuresSection.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    window.location.href = 'https://aquaiot.com/features';
+  }
+});
+
+document.querySelector('.cta-button').addEventListener('click', () => {
+  window.location.href = 'https://aquaiot.com/signup';
+});
+
+// Animated search functionality
+const searchInput = document.querySelector('.search-input');
+searchInput.addEventListener('input', (e) => {
+  console.log('Searching for:', e.target.value);
+});
+
+// Add hover animations to feature cards
+document.querySelectorAll('.feature-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    card.querySelector('.feature-icon').style.transform = 'scale(1.1) rotate(5deg)';
+    card.style.transform = 'translateY(-15px)';
+  });
+  
+  card.addEventListener('mouseleave', () => {
+    card.querySelector('.feature-icon').style.transform = 'scale(1) rotate(0)';
+    card.style.transform = 'translateY(0)';
+  });
+  
+  // Add subtle floating animation to metrics
+  card.querySelectorAll('.metric').forEach((metric, index) => {
+    metric.style.animation = `float ${2 + index * 0.5}s ease-in-out infinite`;
+  });
+});
+
+// Add hover animations to step cards
+document.querySelectorAll('.step-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    card.querySelector('.step-icon').style.transform = 'scale(1.1)';
+    card.style.transform = 'translateY(-5px)';
+  });
+  
+  card.addEventListener('mouseleave', () => {
+    card.querySelector('.step-icon').style.transform = 'scale(1)';
+    card.style.transform = 'translateY(0)';
+  });
+});
+
+// Testimonials carousel functionality
+const testimonials = document.querySelectorAll('.testimonial');
+const dotsContainer = document.querySelector('.carousel-dots');
+let currentTestimonial = 0;
+
+// Create dots
+testimonials.forEach((_, index) => {
+  const dot = document.createElement('div');
+  dot.classList.add('carousel-dot');
+  if (index === 0) dot.classList.add('active');
+  dot.addEventListener('click', () => showTestimonial(index));
+  dotsContainer.appendChild(dot);
+});
+
+function showTestimonial(index) {
+  testimonials.forEach(testimonial => {
+    testimonial.classList.remove('active');
+    testimonial.style.transform = 'translateX(100%)';
+  });
+  
+  document.querySelectorAll('.carousel-dot').forEach(dot => {
+    dot.classList.remove('active');
+  });
+  
+  testimonials[index].classList.add('active');
+  document.querySelectorAll('.carousel-dot')[index].classList.add('active');
+  currentTestimonial = index;
+}
+
+document.querySelector('.carousel-button.prev').addEventListener('click', () => {
+  currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+  showTestimonial(currentTestimonial);
+});
+
+document.querySelector('.carousel-button.next').addEventListener('click', () => {
+  currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+  showTestimonial(currentTestimonial);
+});
+
+// Auto-advance carousel
+setInterval(() => {
+  currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+  showTestimonial(currentTestimonial);
+}, 5000);
+
+document.querySelector('.primary-cta').addEventListener('click', () => {
+  window.location.href = 'https://aquaiot.com/signup';
+});
+
+// Add this JavaScript for additional animation effects
+document.addEventListener('DOMContentLoaded', () => {
+  const fishGroup = document.querySelector('.fish-group');
+  for (let i = 0; i < 5; i++) {
+    const fish = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    fish.setAttribute('d', 'M30,15 Q40,15 50,15 T70,15 L80,10 L70,15 L80,20 L70,15');
+    fish.setAttribute('fill', 'rgba(255,255,255,0.6)');
+    
+    const animation = document.createElementNS("http://www.w3.org/2000/svg", "animateMotion");
+    animation.setAttribute('path', `M0,${i * 200} Q400,${i * 200 + 50} 800,${i * 200} T0,${i * 200}`);
+    animation.setAttribute('dur', `${15 + i * 2}s`);
+    animation.setAttribute('repeatCount', 'indefinite');
+    
+    fish.appendChild(animation);
+    fishGroup.appendChild(fish);
+  }
+  
+  const bubblesGroup = document.querySelector('.bubbles');
+  for (let i = 0; i < 15; i++) {
+    const bubble = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    const x = Math.random() * 1000;
+    const y = Math.random() * 1000;
+    const r = Math.random() * 3 + 1;
+    
+    bubble.setAttribute('cx', x);
+    bubble.setAttribute('cy', y);
+    bubble.setAttribute('r', r);
+    bubble.setAttribute('fill', 'rgba(255,255,255,0.5)');
+    
+    const animateY = document.createElementNS("http://www.w3.org/2000/svg", "animate");
+    animateY.setAttribute('attributeName', 'cy');
+    animateY.setAttribute('values', `${y};0`);
+    animateY.setAttribute('dur', `${10 + Math.random() * 10}s`);
+    animateY.setAttribute('repeatCount', 'indefinite');
+    
+    bubble.appendChild(animateY);
+    bubblesGroup.appendChild(bubble);
+  }
+});
+</script>
+</body></html>

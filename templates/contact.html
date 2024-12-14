@@ -1,0 +1,443 @@
+<html><head><base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaIoT - Smart Fish Farm Management</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --primary: #0088cc;
+  --secondary: #00a8e8;
+  --accent: #ff6b6b;
+  --dark: #333;
+  --light: #f9f9f9;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+.cta-button {
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255,107,107,0.3);
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-input {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  width: 200px;
+}
+
+.contact-hero {
+  margin-top: 70px;
+  background: linear-gradient(135deg, rgba(0,88,155,0.98) 0%, rgba(0,168,232,0.98) 100%);
+  padding: 4rem 2rem;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.contact-content {
+  padding: 5rem 2rem;
+  background: #f8f9fa;
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.contact-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.contact-form h2 {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 2rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.contact-info {
+  display: grid;
+  gap: 3rem;
+}
+
+.info-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.info-card h3 {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+.faq-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.faq-section h3 {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+.faq-item h4 {
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.faq-item p {
+  color: #666;
+}
+
+.footer {
+  background: linear-gradient(135deg, rgba(51,51,51,0.98) 0%, rgba(34,34,34,0.98) 100%);
+  padding: 4rem 2rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-section h3 {
+  color: var(--secondary);
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s, transform 0.3s;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: white;
+  transform: translateX(5px);
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  transition: all 0.3s;
+}
+
+.social-icon:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-3px);
+}
+
+.contact-info {
+  color: #ccc;
+  line-height: 1.8;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 3rem;
+  margin-top: 3rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: #999;
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .social-links {
+    justify-content: center;
+  }
+  
+  .footer-links a:hover {
+    transform: none;
+  }
+}
+</style>
+</head>
+<body>
+  <nav>
+    <a href="https://aquaiot.com" class="logo">
+      <svg width="32" height="32" viewBox="0 0 32 32">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="#0088cc" stroke-width="2"></circle>
+        <path d="M16 8 C12 8 8 12 8 16 C8 20 12 24 16 24 C20 24 24 20 24 16" fill="none" stroke="#0088cc" stroke-width="2"></path>
+        <circle cx="16" cy="16" r="4" fill="#0088cc"></circle>
+      </svg>
+      AquaIoT
+    </a>
+    <div class="nav-links">
+      <a href="https://aquaiot.com">Home</a>
+      <a href="https://aquaiot.com/features">Features</a>
+      <a href="https://aquaiot.com/about">About Us</a>
+      <a href="https://aquaiot.com/contact">Contact</a>
+      <div class="search-container">
+        <input type="search" class="search-input" placeholder="Search...">
+      </div>
+      <button class="cta-button">Login / Sign Up</button>
+    </div>
+  </nav>
+
+  <section class="contact-hero">
+    <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem;">Contact Us</h1>
+    <p style="font-size: 1.5rem; max-width: 800px; margin: 0 auto; line-height: 1.6;">We're here to help you succeed in your aquaculture journey</p>
+  </section>
+
+  <section class="contact-content">
+    <div class="content-wrapper">
+      <div class="contact-form">
+        <h2>Send us a Message</h2>
+        <form id="contactForm" onsubmit="event.preventDefault(); handleSubmit();" style="display: grid; gap: 1.5rem;">
+          <div class="form-group" style="display: grid; gap: 0.5rem;">
+            <label for="name" style="font-weight: 500; color: #444;">Name</label>
+            <input type="text" id="name" required style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
+          </div>
+          
+          <div class="form-group" style="display: grid; gap: 0.5rem;">
+            <label for="email" style="font-weight: 500; color: #444;">Email</label>
+            <input type="email" id="email" required style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
+          </div>
+          
+          <div class="form-group" style="display: grid; gap: 0.5rem;">
+            <label for="subject" style="font-weight: 500; color: #444;">Subject</label>
+            <input type="text" id="subject" required style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
+          </div>
+          
+          <div class="form-group" style="display: grid; gap: 0.5rem;">
+            <label for="message" style="font-weight: 500; color: #444;">Message</label>
+            <textarea id="message" required rows="5" style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; resize: vertical;"></textarea>
+          </div>
+          
+          <button type="submit" class="cta-button" style="width: 100%; padding: 1rem; font-size: 1.1rem;">Send Message</button>
+        </form>
+      </div>
+      
+      <div class="support-info" style="display: grid; gap: 3rem;">
+        <div class="info-card">
+          <h3 style="font-size: 1.5rem; color: var(--primary); margin-bottom: 1.5rem;">Contact Information</h3>
+          <div style="display: grid; gap: 1rem;">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path>
+              </svg>
+              <p style="color: #444;">support@fishfarmingsystem.com</p>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path>
+              </svg>
+              <p style="color: #444;">+123 456 7890</p>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <p style="color: #444;">123 Aquaculture Lane, Bluewater City</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="faq-section">
+          <h3 style="font-size: 1.5rem; color: var(--primary); margin-bottom: 1.5rem;">Frequently Asked Questions</h3>
+          <div class="faq-list" style="display: grid; gap: 1.5rem;">
+            <div class="faq-item">
+              <h4 style="color: #444; margin-bottom: 0.5rem;">How do I connect my sensors?</h4>
+              <p style="color: #666;">Follow our step-by-step guide available in the Educational Resources section.</p>
+            </div>
+            
+            <div class="faq-item">
+              <h4 style="color: #444; margin-bottom: 0.5rem;">Can I use the platform without IoT devices?</h4>
+              <p style="color: #666;">Yes, manual data entry is fully supported.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="https://aquaiot.com/dashboard">Dashboard</a></li>
+          <li><a href="https://aquaiot.com/marketplace">E-commerce</a></li>
+          <li><a href="https://aquaiot.com/community">Community</a></li>
+          <li><a href="https://aquaiot.com/resources">Educational Resources</a></li>
+          <li><a href="https://aquaiot.com/privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Connect With Us</h3>
+        <div class="social-links">
+          <a href="https://facebook.com/aquaiot" aria-label="Facebook">
+            <svg class="social-icon" viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="none" stroke="currentColor" stroke-width="2"></path>
+            </svg>
+          </a>
+          <a href="https://twitter.com/aquaiot" aria-label="Twitter">
+            <svg class="social-icon" viewBox="0 0 24 24">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" fill="none" stroke="currentColor" stroke-width="2"></path>
+            </svg>
+          </a>
+          <a href="https://instagram.com/aquaiot" aria-label="Instagram">
+            <svg class="social-icon" viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"></rect>
+              <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+              <circle cx="17" cy="7" r="1" fill="currentColor"></circle>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <div class="contact-info">
+          <p>Email: support@aquasmart.com</p>
+          <p>Phone: +254-700-123456</p>
+          <p>Working Hours: Mon-Fri, 8am-5pm EAT</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2023 AquaIoT. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+function handleSubmit() {
+  const form = document.getElementById('contactForm');
+  const formData = new FormData(form);
+  
+  // Show loading state
+  const submitButton = form.querySelector('button[type="submit"]');
+  const originalText = submitButton.textContent;
+  submitButton.textContent = 'Sending...';
+  submitButton.disabled = true;
+  
+  // Simulate form submission
+  setTimeout(() => {
+    submitButton.textContent = 'Message Sent!';
+    submitButton.style.backgroundColor = '#2ecc71';
+    
+    // Reset form
+    form.reset();
+    
+    // Reset button after 3 seconds
+    setTimeout(() => {
+      submitButton.textContent = originalText;
+      submitButton.style.backgroundColor = '';
+      submitButton.disabled = false;
+    }, 3000);
+  }, 1500);
+}
+</script>
+</body></html>

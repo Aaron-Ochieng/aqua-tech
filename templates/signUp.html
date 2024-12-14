@@ -1,0 +1,301 @@
+<html><head><base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaIoT - Sign Up</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --primary: #0088cc;
+  --secondary: #00a8e8;
+  --accent: #ff6b6b;
+  --dark: #333;
+  --light: #f9f9f9;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+.cta-button {
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255,107,107,0.3);
+}
+
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"><rect width="1000" height="600" fill="%230088cc"/><path d="M0 400 Q 250 300 500 400 T 1000 400 V600 H0 Z" fill="%2300a8e8"/></svg>');
+  background-size: cover;
+  background-position: center;
+  padding: 2rem;
+}
+
+.auth-card {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-header h1 {
+  color: var(--primary);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.auth-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: var(--dark);
+}
+
+.form-group input {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--dark);
+}
+
+.auth-footer a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+.fish-animation {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bubble {
+  position: absolute;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  animation: float 8s infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-20vh) scale(1);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+<body>
+  <nav>
+    <a href="https://aquaiot.com" class="logo">
+      <svg width="32" height="32" viewBox="0 0 32 32">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="#0088cc" stroke-width="2"></circle>
+        <path d="M16 8 C12 8 8 12 8 16 C8 20 12 24 16 24 C20 24 24 20 24 16" fill="none" stroke="#0088cc" stroke-width="2"></path>
+        <circle cx="16" cy="16" r="4" fill="#0088cc"></circle>
+      </svg>
+      AquaIoT
+    </a>
+    <div class="nav-links">
+      <a href="https://aquaiot.com">Home</a>
+      <a href="https://aquaiot.com/features">Features</a>
+      <a href="https://aquaiot.com/about">About Us</a>
+      <a href="https://aquaiot.com/contact">Contact</a>
+      <button class="cta-button">Login / Sign Up</button>
+    </div>
+  </nav>
+
+  <main class="auth-container">
+    <div class="fish-animation" id="bubbleContainer"></div>
+    <div class="auth-card">
+  <div class="auth-header">
+    <svg width="64" height="64" viewBox="0 0 64 64" style="margin-bottom: 1rem;">
+      <circle cx="32" cy="32" r="28" fill="none" stroke="#0088cc" stroke-width="3"></circle>
+      <path d="M32 16 C24 16 16 24 16 32 C16 40 24 48 32 48 C40 48 48 40 48 32" fill="none" stroke="#0088cc" stroke-width="3"></path>
+      <circle cx="32" cy="32" r="8" fill="#0088cc"></circle>
+      <g class="water-drops" fill="#00a8e8">
+        <circle cx="24" cy="40" r="3">
+          <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"></animate>
+          <animate attributeName="cy" values="40;36;40" dur="2s" repeatCount="indefinite"></animate>
+        </circle>
+        <circle cx="40" cy="40" r="3">
+          <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0.5s" repeatCount="indefinite"></animate>
+          <animate attributeName="cy" values="40;36;40" dur="2s" begin="0.5s" repeatCount="indefinite"></animate>
+        </circle>
+      </g>
+    </svg>
+    <h1>Create Account</h1>
+    <p>Join our community of smart fish farmers</p>
+    <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">Experience the future of aquaculture management</p>
+  </div>
+  
+  <form class="auth-form" id="signupForm" onsubmit="event.preventDefault(); handleSignup();">
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required="">
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" required="">
+    </div>
+    
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" required="">
+    </div>
+    
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" required="">
+    </div>
+    
+    <button type="submit" class="cta-button" style="width: 100%; padding: 1rem;">
+      Sign Up
+    </button>
+  </form>
+  
+  <div class="auth-footer">
+    <p>Already have an account? <a href="https://aquaiot.com/login">Login</a></p>
+  </div>
+</div>
+  </main>
+
+  <script>
+  function createBubbles() {
+    const container = document.getElementById('bubbleContainer');
+    for(let i = 0; i < 20; i++) {
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.style.left = `${Math.random() * 100}%`;
+      bubble.style.width = `${Math.random() * 30 + 10}px`;
+      bubble.style.height = bubble.style.width;
+      bubble.style.animationDelay = `${Math.random() * 8}s`;
+      container.appendChild(bubble);
+    }
+  }
+
+  function handleSignup() {
+    const form = document.getElementById('signupForm');
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
+    
+    if (password !== confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+    
+    submitButton.textContent = 'Creating Account...';
+    submitButton.disabled = true;
+    
+    // Simulate signup process
+    setTimeout(() => {
+      submitButton.textContent = 'Success!';
+      submitButton.style.backgroundColor = '#2ecc71';
+      
+      setTimeout(() => {
+        window.location.href = 'https://aquaiot.com/dashboard';
+      }, 1000);
+    }, 1500);
+  }
+
+  // Initialize bubbles on load
+  createBubbles();
+  </script>
+
+</body></html>

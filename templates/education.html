@@ -1,6 +1,6 @@
 <html><head><base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AquaIoT - Dashboard</title>
+<title>AquaIoT - Community</title>
 <style>
 * {
   margin: 0;
@@ -124,12 +124,6 @@ nav {
   padding: 2rem;
 }
 
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
-
 .card {
   background: white;
   border-radius: 15px;
@@ -137,46 +131,22 @@ nav {
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-.metric-card {
-  text-align: center;
+.post-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-.metric-value {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: var(--primary);
-  margin: 1rem 0;
-}
-
-.metric-label {
-  color: var(--dark);
-  font-weight: 500;
-}
-
-.chart-card {
-  grid-column: span 2;
-  min-height: 300px;
-}
-
-.status-indicator {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin-right: 8px;
-}
-
-.status-good { background: var(--success); }
-.status-warning { background: var(--warning); }
-.status-error { background: var(--danger); }
-
-.user-profile {
+.post-header {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-.user-avatar {
+.post-author-avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -185,75 +155,130 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
+  font-weight: 500;
 }
 
-.notifications {
-  position: relative;
-  cursor: pointer;
-}
-
-.notification-badge {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background: var(--accent);
-  color: white;
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.notifications-card {
-  background: white;
-  padding: 1.5rem;
-}
-
-.notification-list {
-  margin-top: 1rem;
-}
-
-.notification-item {
-  display: flex;
-  align-items: start;
-  padding: 1rem;
-  border-bottom: 1px solid #eee;
-  gap: 1rem;
-}
-
-.notification-item:last-child {
-  border-bottom: none;
-}
-
-.notification-icon {
-  font-size: 1.5rem;
-}
-
-.notification-content {
+.post-meta {
   flex: 1;
 }
 
-.notification-title {
-  font-weight: 600;
+.post-author {
+  font-weight: 500;
   color: var(--dark);
 }
 
-.notification-details {
+.post-date {
+  font-size: 0.85rem;
   color: #666;
-  margin: 0.2rem 0;
 }
 
-.notification-time {
-  font-size: 0.8rem;
-  color: #999;
+.post-content {
+  margin: 1rem 0;
+  line-height: 1.6;
 }
 
-.alert-card .metric-value {
-  color: var(--danger);
+.post-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.tag {
+  background: #f0f2f5;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.post-interactions {
+  display: flex;
+  gap: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.interaction-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+}
+
+.interaction-btn:hover {
+  color: var(--primary);
+}
+
+.comments-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.comment {
+  margin: 1rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid #eee;
+}
+
+.create-post-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.attachment-preview {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.preview-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+textarea.post-input {
+  width: 100%;
+  min-height: 100px;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  resize: vertical;
+  margin: 1rem 0;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-tools {
+  display: flex;
+  gap: 1rem;
+}
+
+.tool-btn {
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #666;
+  background: none;
+  border: none;
+}
+
+.tool-btn:hover {
+  background: #f0f2f5;
 }
 
 @media (max-width: 1200px) {
@@ -262,6 +287,106 @@ nav {
   }
 }
 
+canvas {
+  width: 100% !important;
+  height: 300px !important;
+}
+
+/* Add new styles for educational resources */
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.resource-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.resource-card:hover {
+  transform: translateY(-5px);
+}
+
+.resource-type {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.type-video {
+  background: #ffeae9;
+  color: var(--accent);
+}
+
+.type-pdf {
+  background: #e1f5fe;
+  color: var(--primary);
+}
+
+.type-blog {
+  background: #e8f5e9;
+  color: var(--success);
+}
+
+.resource-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--dark);
+}
+
+.resource-description {
+  color: #666;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.resource-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.category-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.category-tab {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.category-tab.active {
+  background: var(--primary);
+  color: white;
+}
+
+.category-tab:hover:not(.active) {
+  background: var(--light);
+}
+
+.resource-action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -297,7 +422,7 @@ nav {
     <div class="sidebar-menu">
       <div class="menu-section">
         <div class="menu-section-title">Main</div>
-        <a href="https://aquaiot.com/dashboard" class="menu-item active">
+        <a href="https://aquaiot.com/dashboard" class="menu-item">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="3" width="7" height="7"></rect>
             <rect x="14" y="3" width="7" height="7"></rect>
@@ -353,7 +478,7 @@ nav {
           </svg>
           E-commerce
         </a>
-        <a href="https://aquaiot.com/community" class="menu-item">
+        <a href="https://aquaiot.com/community" class="menu-item active">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
             <circle cx="9" cy="7" r="4"></circle>
@@ -385,179 +510,96 @@ nav {
   </aside>
 
   <main class="main-content">
-    <div class="dashboard-grid">
-      <div class="card metric-card">
-        <div class="metric-label">Water Temperature (Farm 1)</div>
-        <div class="metric-value">25°C</div>
-        <div><span class="status-indicator status-good"></span>Optimal</div>
-      </div>
+    <div class="card">
+      <h1>Educational Resources</h1>
       
-      <div class="card metric-card">
-        <div class="metric-label">Dissolved Oxygen</div>
-        <div class="metric-value">7.2 mg/L</div>
-        <div><span class="status-indicator status-warning"></span>Monitor</div>
-      </div>
-      
-      <div class="card metric-card">
-        <div class="metric-label">pH Level (Farm 3)</div>
-        <div class="metric-value">7.2</div>
-        <div><span class="status-indicator status-good"></span>Optimal</div>
+      <div class="category-tabs">
+        <div class="category-tab active">Getting Started</div>
+        <div class="category-tab">Advanced Farming</div>
+        <div class="category-tab">IoT Integration</div>
       </div>
 
-      <div class="card metric-card">
-        <div class="metric-label">Oxygen Level (Farm 4)</div>
-        <div class="metric-value">8.1 mg/L</div>
-        <div><span class="status-indicator status-good"></span>Optimal</div>
-      </div>
-
-      <div class="card metric-card">
-        <div class="metric-label">Total Farms</div>
-        <div class="metric-value">5</div>
-        <div><span class="status-indicator status-good"></span>All Active</div>
-      </div>
-
-      <div class="card metric-card">
-        <div class="metric-label">Active Sensors</div>
-        <div class="metric-value">12</div>
-        <div><span class="status-indicator status-good"></span>All Connected</div>
-      </div>
-
-      <div class="card metric-card alert-card">
-        <div class="metric-label">Critical Alerts</div>
-        <div class="metric-value" style="color: var(--danger)">2</div>
-        <div><span class="status-indicator status-error"></span>Needs Attention</div>
-      </div>
-
-      <div class="card metric-card">
-        <div class="metric-label">Tasks Scheduled</div>
-        <div class="metric-value">3</div>
-        <div><span class="status-indicator status-warning"></span>Pending</div>
-      </div>
-
-      <div class="card notifications-card" style="grid-column: span 2;">
-        <h3>Recent Notifications</h3>
-        <div class="notification-list">
-          <div class="notification-item">
-            <span class="notification-icon">🔔</span>
-            <div class="notification-content">
-              <div class="notification-title">Feeding Cycle Started</div>
-              <div class="notification-details">Feeding cycle started at Farm 1</div>
-              <div class="notification-time">2 minutes ago</div>
-            </div>
-          </div>
-          <div class="notification-item">
-            <span class="notification-icon">⚠️</span>
-            <div class="notification-content">
-              <div class="notification-title">Sensor Maintenance Required</div>
-              <div class="notification-details">Sensor 4 needs calibration</div>
-              <div class="notification-time">15 minutes ago</div>
-            </div>
-          </div>
-          <div class="notification-item">
-            <span class="notification-icon">⚠️</span>
-            <div class="notification-content">
-              <div class="notification-title">Low Oxygen Alert</div>
-              <div class="notification-details">Low Oxygen Level at Farm 2</div>
-              <div class="notification-time">1 hour ago</div>
-            </div>
+      <div class="resource-grid">
+        <!-- Getting Started -->
+        <div class="resource-card">
+          <span class="resource-type type-video">Video Tutorial</span>
+          <h3 class="resource-title">Setting Up a Tarpaulin Pond</h3>
+          <p class="resource-description">Learn the step-by-step process of setting up your first tarpaulin pond for aquaculture, including material selection and installation tips.</p>
+          <div class="resource-meta">
+            <span>Duration: 15 mins</span>
+            <a href="https://aquaiot.com/resources/tarpaulin-setup" class="resource-action">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+              </svg>
+              Watch Now
+            </a>
           </div>
         </div>
-      </div>
 
-      <div class="card chart-card">
-        <h3>Temperature Trends</h3>
-        <canvas id="temperatureChart" style="height: 300px !important;" height="300"></canvas>
-      </div>
+        <div class="resource-card">
+          <span class="resource-type type-pdf">PDF Guide</span>
+          <h3 class="resource-title">Optimal Feeding Cycles</h3>
+          <p class="resource-description">Comprehensive guide on creating efficient feeding schedules based on species, growth stage, and environmental factors.</p>
+          <div class="resource-meta">
+            <span>25 pages</span>
+            <a href="https://aquaiot.com/resources/feeding-guide" class="resource-action">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+              </svg>
+              Download PDF
+            </a>
+          </div>
+        </div>
 
-      <div class="card chart-card">
-        <h3>Water Quality Parameters</h3>
-        <canvas id="qualityChart"></canvas>
+        <div class="resource-card">
+          <span class="resource-type type-blog">Blog Post</span>
+          <h3 class="resource-title">Choosing the Right Sensors</h3>
+          <p class="resource-description">Expert advice on selecting appropriate sensors for your aquaculture setup, including pH, temperature, and oxygen monitoring.</p>
+          <div class="resource-meta">
+            <span>10 min read</span>
+            <a href="https://aquaiot.com/resources/sensor-selection" class="resource-action">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+              </svg>
+              Read More
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </main>
 
   <script>
-    // Temperature Chart
-    const tempCtx = document.getElementById('temperatureChart').getContext('2d');
-    new Chart(tempCtx, {
-      type: 'line',
-      data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        datasets: [{
-          label: 'Temperature (°C)',
-          data: [23, 24, 25, 26, 27, 28, 29, 28.5, 27, 26, 24, 23],
-          borderColor: '#0088cc',
-          tension: 0.4,
-          fill: false
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          title: {
-            display: true,
-            text: 'Annual Temperature Trends'
-          }
-        },
-        scales: {
-          y: {
-            min: 20,
-            max: 30,
-            ticks: {
-              stepSize: 2
-            }
-          }
-        }
-      }
-    });
+    document.addEventListener('DOMContentLoaded', function() {
+      // Handle post form submission
+      document.getElementById('createPostForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Post created successfully!');
+        this.reset();
+      });
 
-    // Water Quality Chart
-    const qualityCtx = document.getElementById('qualityChart').getContext('2d');
-    new Chart(qualityCtx, {
-      type: 'bar',
-      data: {
-        labels: ['pH', 'Dissolved Oxygen', 'Ammonia', 'Nitrates', 'Salinity', 'Turbidity'],
-        datasets: [{
-          label: 'Current Levels',
-          data: [7.2, 8.5, 0.02, 15, 32, 5],
-          backgroundColor: [
-            '#0088cc',
-            '#00a8e8',
-            '#ff6b6b',
-            '#2ecc71',
-            '#f1c40f',
-            '#9b59b6'
-          ]
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          title: {
-            display: true,
-            text: 'Water Quality Parameters'
+      // Handle post interactions
+      document.querySelectorAll('.interaction-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          if (this.textContent.includes('Like')) {
+            this.classList.toggle('active');
+            const likes = parseInt(this.textContent);
+            this.textContent = this.classList.contains('active') ? 
+              `${likes + 1} Likes` : `${likes - 1} Likes`;
           }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              callback: function(value, index, values) {
-                if (this.getLabelForValue(value).includes('pH')) return value;
-                return value + ' mg/L';
-              }
-            }
-          }
-        }
-      }
+        });
+      });
+
+      // Handle category tab switching
+      const tabs = document.querySelectorAll('.category-tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          // Here you would typically filter/show relevant resources
+          // based on the selected category
+        });
+      });
     });
   </script>
 

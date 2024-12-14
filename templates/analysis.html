@@ -1,0 +1,889 @@
+<html><head><base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaIoT - Dashboard</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --primary: #0088cc;
+  --secondary: #00a8e8;
+  --accent: #ff6b6b;
+  --dark: #333;
+  --light: #f9f9f9;
+  --success: #2ecc71;
+  --warning: #f1c40f;
+  --danger: #e74c3c;
+}
+
+body {
+  background: #f0f2f5;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+.search-container {
+  flex: 1;
+  max-width: 500px;
+  margin: 0 2rem;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  outline: none;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.search-bar:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(0,136,204,0.2);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 70px;
+  height: calc(100vh - 70px);
+  width: 250px;
+  background: white;
+  padding: 2rem;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  overflow-y: auto;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.menu-section {
+  margin-bottom: 1.5rem;
+}
+
+.menu-section-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 0.5rem;
+  padding-left: 0.8rem;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+  color: var(--dark);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.menu-item:hover {
+  background: var(--light);
+  color: var(--primary);
+}
+
+.menu-item.active {
+  background: var(--primary);
+  color: white;
+}
+
+.main-content {
+  margin-left: 250px;
+  margin-top: 70px;
+  padding: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.farms-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.farms-table th,
+.farms-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.farms-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.edit-btn {
+  color: var(--primary);
+  background: rgba(0, 136, 204, 0.1);
+}
+
+.delete-btn {
+  color: var(--danger);
+  background: rgba(231, 76, 60, 0.1);
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: var(--dark);
+}
+
+.form-group select,
+.form-group input {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-secondary {
+  background: #eee;
+  color: var(--dark);
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.chart-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.chart-card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: var(--dark);
+}
+
+.table-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.filter-group {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-end;
+}
+
+.filter-group .form-group {
+  margin: 0;
+}
+
+#exportBtn {
+  height: fit-content;
+}
+
+canvas {
+  width: 100% !important;
+  height: 300px !important;
+}
+
+@media (max-width: 1200px) {
+  .chart-card {
+    grid-column: 1 / -1;
+  }
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <nav>
+    <a href="https://aquaiot.com" class="logo">
+      <svg width="32" height="32" viewBox="0 0 32 32">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="#0088cc" stroke-width="2"></circle>
+        <path d="M16 8 C12 8 8 12 8 16 C8 20 12 24 16 24 C20 24 24 20 24 16" fill="none" stroke="#0088cc" stroke-width="2"></path>
+        <circle cx="16" cy="16" r="4" fill="#0088cc"></circle>
+      </svg>
+      AquaIoT
+    </a>
+
+    <div class="search-container">
+      <input type="search" class="search-bar" placeholder="Search farms, sensors, products, or community posts...">
+    </div>
+
+    <div class="user-profile">
+      <div class="notifications">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        <span class="notification-badge">3</span>
+      </div>
+      <div class="user-avatar">JD</div>
+      <span>John Doe</span>
+    </div>
+  </nav>
+
+  <aside class="sidebar">
+    <div class="sidebar-menu">
+      <div class="menu-section">
+        <div class="menu-section-title">Main</div>
+        <a href="https://aquaiot.com/dashboard" class="menu-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          Dashboard
+        </a>
+        <a href="https://aquaiot.com/farms" class="menu-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          </svg>
+          Farms
+        </a>
+        <a href="https://aquaiot.com/sensors" class="menu-item active">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          Sensors
+        </a>
+      </div>
+
+      <div class="menu-section">
+        <div class="menu-section-title">Data &amp; Analysis</div>
+        <a href="https://aquaiot.com/manual-data" class="menu-item active">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          Manual Data
+        </a>
+        <a href="https://aquaiot.com/analysis" class="menu-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          Analysis
+        </a>
+      </div>
+
+      <div class="menu-section">
+        <div class="menu-section-title">Marketplace &amp; Community</div>
+        <a href="https://aquaiot.com/marketplace" class="menu-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          E-commerce
+        </a>
+        <a href="https://aquaiot.com/community" class="menu-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          Community
+        </a>
+      </div>
+
+      <div class="menu-section">
+        <div class="menu-section-title">Resources</div>
+        <a href="https://aquaiot.com/education" class="menu-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          Educational Resources
+        </a>
+        <a href="https://aquaiot.com/reports" class="menu-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+          Reports
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="card">
+      <h1>Analysis Dashboard</h1>
+      
+      <div class="chart-grid">
+        <div class="chart-card">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+    <h2>pH Levels Over Time</h2>
+    <select id="phFarmSelect" style="padding: 0.5rem; border-radius: 4px; border: 1px solid #ddd;">
+      <option value="all">All Farms</option>
+      <option value="farm1">Farm 1</option>
+      <option value="farm2">Farm 2</option>
+      <option value="farm3">Farm 3</option>
+    </select>
+  </div>
+  <canvas id="phChart">
+    <script>
+    // Create dummy data for pH levels
+    const phData = {
+      labels: Array.from({length: 30}, (_, i) => `Day ${i+1}`),
+      datasets: [{
+        label: 'Farm 1',
+        data: Array.from({length: 30}, () => 7 + (Math.random() * 1.4 - 0.7)),
+        borderColor: '#0088cc',
+        backgroundColor: 'rgba(0, 136, 204, 0.1)',
+        tension: 0.4,
+        fill: true
+      }, {
+        label: 'Farm 2',
+        data: Array.from({length: 30}, () => 7.2 + (Math.random() * 1.2 - 0.6)),
+        borderColor: '#00a8e8',
+        backgroundColor: 'rgba(0, 168, 232, 0.1)',
+        tension: 0.4,
+        fill: true
+      }, {
+        label: 'Farm 3',
+        data: Array.from({length: 30}, () => 7.1 + (Math.random() * 1.3 - 0.65)),
+        borderColor: '#00cc88',
+        backgroundColor: 'rgba(0, 204, 136, 0.1)',
+        tension: 0.4,
+        fill: true
+      }]
+    };
+
+    // Create the pH chart
+    const phChart = new Chart(document.getElementById('phChart'), {
+      type: 'line',
+      data: phData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: 'pH Levels Over 30 Days'
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false
+          }
+        },
+        scales: {
+          y: {
+            min: 6,
+            max: 9,
+            title: {
+              display: true,
+              text: 'pH Level'
+            },
+            grid: {
+              color: 'rgba(0,0,0,0.1)'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Day'
+            },
+            grid: {
+              color: 'rgba(0,0,0,0.1)'
+            }
+          }
+        },
+        elements: {
+          point: {
+            radius: 2,
+            hoverRadius: 5
+          }
+        }
+      }
+    });
+
+    // Add event listener for farm selection
+    document.getElementById('phFarmSelect').addEventListener('change', function(e) {
+      const selectedValue = e.target.value;
+      const allDatasets = [...phChart.data.datasets];
+      
+      if (selectedValue === 'all') {
+        phChart.data.datasets = allDatasets;
+      } else {
+        const selectedFarmIndex = parseInt(selectedValue.replace('farm', '')) - 1;
+        phChart.data.datasets = [allDatasets[selectedFarmIndex]];
+      }
+      
+      phChart.update();
+    });
+    </script>
+  </canvas>
+</div>
+        
+        <div class="chart-card">
+          <h2>Oxygen vs Temperature Correlation</h2>
+          <canvas id="correlationChart">
+  <script>
+    // Create dummy data for oxygen and temperature correlation as bar chart
+    const corrData = {
+      labels: ['Farm 1', 'Farm 2', 'Farm 3'],
+      datasets: [
+        {
+          label: 'Average Temperature (°C)',
+          data: [25.4, 24.8, 26.1],
+          backgroundColor: '#0088cc',
+          order: 2
+        },
+        {
+          label: 'Dissolved Oxygen (mg/L)',
+          data: [8.2, 8.4, 7.9],
+          backgroundColor: '#00cc88',
+          order: 1
+        }
+      ]
+    };
+
+    // Create the correlation chart as a bar chart
+    const corrChart = new Chart(document.getElementById('correlationChart'), {
+      type: 'bar',
+      data: corrData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Temperature and Dissolved Oxygen by Farm'
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false
+          },
+          legend: {
+            position: 'top'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            min: 0,
+            max: 30,
+            grid: {
+              color: 'rgba(0,0,0,0.1)'
+            },
+            ticks: {
+              callback: function(value) {
+                return value + (this.chart.data.datasets[0].label.includes('Temperature') ? '°C' : ' mg/L');
+              }
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+        },
+        animation: {
+          duration: 1000,
+          easing: 'easeInOutQuart'
+        }
+      }
+    });
+
+    // Add event listener for farm selection
+    document.getElementById('phFarmSelect').addEventListener('change', function(e) {
+      const selectedValue = e.target.value;
+      if (selectedValue === 'all') {
+        corrChart.data.labels = ['Farm 1', 'Farm 2', 'Farm 3'];
+        corrChart.data.datasets[0].data = [25.4, 24.8, 26.1];
+        corrChart.data.datasets[1].data = [8.2, 8.4, 7.9];
+      } else {
+        const farmIndex = parseInt(selectedValue.replace('farm', '')) - 1;
+        corrChart.data.labels = [selectedValue.toUpperCase()];
+        corrChart.data.datasets[0].data = [corrChart.data.datasets[0].data[farmIndex]];
+        corrChart.data.datasets[1].data = [corrChart.data.datasets[1].data[farmIndex]];
+      }
+      corrChart.update();
+    });
+  </script>
+</canvas>
+        </div>
+        
+        <div class="chart-card">
+          <h2>Sensor Alerts by Farm</h2>
+          <canvas id="alertsChart">
+<script>
+// Create dummy data for notifications as a doughnut chart
+const notificationData = {
+  labels: ['Critical Alerts', 'Warning Alerts', 'System Messages', 'Maintenance Updates'],
+  datasets: [{
+    data: [12, 19, 8, 15],
+    backgroundColor: [
+      '#e74c3c', // red for critical
+      '#f1c40f', // yellow for warnings
+      '#3498db', // blue for system
+      '#2ecc71'  // green for maintenance
+    ],
+    borderWidth: 1
+  }]
+};
+
+// Create the notifications chart
+const notificationsChart = new Chart(document.getElementById('alertsChart'), {
+  type: 'doughnut',
+  data: notificationData,
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      title: {
+        display: true,
+        text: 'System Notifications Distribution'
+      },
+      legend: {
+        position: 'bottom'
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            const label = context.label || '';
+            const value = context.parsed || 0;
+            const total = context.dataset.data.reduce((acc, curr) => acc + curr, 0);
+            const percentage = ((value / total) * 100).toFixed(1);
+            return `${label}: ${value} (${percentage}%)`;
+          }
+        }
+      }
+    },
+    cutout: '60%',
+    animation: {
+      animateRotate: true,
+      animateScale: true
+    }
+  }
+});
+
+// Add interactivity
+document.getElementById('alertsChart').addEventListener('click', function(evt) {
+  const points = notificationsChart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+  if (points.length) {
+    const firstPoint = points[0];
+    const label = notificationsChart.data.labels[firstPoint.index];
+    const value = notificationsChart.data.datasets[0].data[firstPoint.index];
+    alert(`${label}: ${value} notifications`);
+  }
+});
+
+// Add event listener for farm selection to maintain sync with other charts
+document.getElementById('phFarmSelect').addEventListener('change', function(e) {
+  const selectedValue = e.target.value;
+  if (selectedValue === 'all') {
+    notificationsChart.data.datasets[0].data = [12, 19, 8, 15];
+  } else {
+    // Generate random data for selected farm
+    notificationsChart.data.datasets[0].data = [
+      Math.floor(Math.random() * 10) + 1,
+      Math.floor(Math.random() * 10) + 1,
+      Math.floor(Math.random() * 10) + 1,
+      Math.floor(Math.random() * 10) + 1
+    ];
+  }
+  notificationsChart.update();
+});
+</script>
+</canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 2rem;">
+      <div class="table-controls">
+        <h2>Raw Sensor Data</h2>
+        <div class="filter-group">
+          <div class="form-group">
+            <label>Date Range</label>
+            <input type="date" id="startDate">
+            <input type="date" id="endDate">
+          </div>
+          <div class="form-group">
+            <label>Farm</label>
+            <select id="farmFilter">
+              <option value="">All Farms</option>
+              <option value="farm1">Farm 1</option>
+              <option value="farm2">Farm 2</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Data Type</label>
+            <select id="typeFilter">
+              <option value="">All Types</option>
+              <option value="ph">pH</option>
+              <option value="oxygen">Oxygen</option>
+              <option value="temperature">Temperature</option>
+            </select>
+          </div>
+          <button class="btn-primary" id="exportBtn">Export to PDF</button>
+        </div>
+      </div>
+
+      <table class="farms-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Farm</th>
+            <th>Sensor Type</th>
+            <th>Value</th>
+            <th>Unit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2024-01-15</td>
+            <td>09:30</td>
+            <td>Farm 1</td>
+            <td>pH</td>
+            <td>7.2</td>
+            <td>pH</td>
+          </tr>
+          <tr>
+            <td>2024-01-15</td>
+            <td>09:30</td>
+            <td>Farm 1</td>
+            <td>Temperature</td>
+            <td>25.3</td>
+            <td>°C</td>
+          </tr>
+          <tr>
+            <td>2024-01-15</td>
+            <td>09:30</td>
+            <td>Farm 2</td>
+            <td>Oxygen</td>
+            <td>8.1</td>
+            <td>mg/L</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set default date and time
+      const now = new Date();
+      document.getElementById('dateInput').value = now.toISOString().split('T')[0];
+      document.getElementById('timeInput').value = now.toTimeString().slice(0,5);
+      
+      // pH Levels Over Time
+      const phCtx = document.getElementById('phChart').getContext('2d');
+      new Chart(phCtx, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          datasets: [{
+            label: 'Farm 1',
+            data: [7.2, 7.1, 7.3, 7.0, 7.2, 7.4],
+            borderColor: '#0088cc',
+            tension: 0.4
+          }, {
+            label: 'Farm 2',
+            data: [7.0, 7.2, 7.1, 7.3, 7.1, 7.0],
+            borderColor: '#00a8e8',
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+
+      // Oxygen vs Temperature Correlation
+      const corrCtx = document.getElementById('correlationChart').getContext('2d');
+      new Chart(corrCtx, {
+        type: 'scatter',
+        data: {
+          datasets: [{
+            label: 'Farm 1',
+            data: [
+              {x: 25, y: 8.1},
+              {x: 26, y: 7.9},
+              {x: 24, y: 8.3},
+              {x: 23, y: 8.5},
+              {x: 25, y: 8.0}
+            ],
+            backgroundColor: '#0088cc'
+          },
+          {
+            label: 'Farm 2',
+            data: [
+              {x: 24, y: 8.2},
+              {x: 25, y: 8.0},
+              {x: 23, y: 8.4},
+              {x: 24, y: 8.3},
+              {x: 26, y: 7.8}
+            ],
+            backgroundColor: '#00a8e8'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Temperature (°C)'
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Oxygen (mg/L)'
+              }
+            }
+          }
+        }
+      });
+
+      // Sensor Alerts per Farm
+      const alertsCtx = document.getElementById('alertsChart').getContext('2d');
+      new Chart(alertsCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Farm 1', 'Farm 2', 'Farm 3', 'Farm 4'],
+          datasets: [{
+            label: 'Critical Alerts',
+            data: [3, 5, 2, 1],
+            backgroundColor: '#e74c3c'
+          }, {
+            label: 'Warning Alerts',
+            data: [5, 3, 4, 6],
+            backgroundColor: '#f1c40f'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Number of Alerts'
+              }
+            }
+          }
+        }
+      });
+
+      // Handle Export Button
+      document.getElementById('exportBtn').addEventListener('click', function() {
+        alert('Generating PDF Report...');
+        // Here you would implement actual PDF generation
+      });
+      
+      // Handle form submission for manual data entry
+      document.getElementById('dataEntryForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Here you would normally handle the form data submission
+        // For now just reset the form
+        this.reset();
+        
+        // Reset date and time to current
+        document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
+        document.getElementById('timeInput').value = new Date().toTimeString().slice(0,5);
+      });
+    });
+  </script>
+
+</body></html>
