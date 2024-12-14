@@ -15,8 +15,8 @@ var (
 )
 
 type Data struct {
-	Temp float64
-	Humidity float64
+	Temp           float64
+	Humidity       float64
 	UltraSonicData float64
 }
 
@@ -36,6 +36,21 @@ func Router() http.Handler {
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		RenderTemplates(w, "dashboard.html")
+	})
+	mux.HandleFunc("/farms", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "farms.html")
+	})
+	mux.HandleFunc("/market", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "marketplace.html")
+	})
+	mux.HandleFunc("/community", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "community.html")
+	})
+	mux.HandleFunc("/reports", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "reports.html")
+	})
+	mux.HandleFunc("/education", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "education.html")
 	})
 
 	mux.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
