@@ -43,19 +43,19 @@ func Router() http.Handler {
 		RenderTemplates(w, "dashboard.html", nil)
 	})
 	mux.HandleFunc("/farms", func(w http.ResponseWriter, r *http.Request) {
-		RenderTemplates(w, "farms.html")
+		RenderTemplates(w, "farms.html", nil)
 	})
 	mux.HandleFunc("/market", func(w http.ResponseWriter, r *http.Request) {
-		RenderTemplates(w, "marketplace.html")
+		RenderTemplates(w, "marketplace.html", nil)
 	})
 	mux.HandleFunc("/community", func(w http.ResponseWriter, r *http.Request) {
-		RenderTemplates(w, "community.html")
+		RenderTemplates(w, "community.html", nil)
 	})
 	mux.HandleFunc("/reports", func(w http.ResponseWriter, r *http.Request) {
-		RenderTemplates(w, "reports.html")
+		RenderTemplates(w, "reports.html", nil)
 	})
 	mux.HandleFunc("/education", func(w http.ResponseWriter, r *http.Request) {
-		RenderTemplates(w, "education.html")
+		RenderTemplates(w, "education.html", nil)
 	})
 
 	mux.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
