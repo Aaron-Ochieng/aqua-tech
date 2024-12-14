@@ -491,8 +491,8 @@ nav {
   
           const data = await response.json();
           // Assuming `temp` is a property of the JSON object
-          temp.innerText = `${data.temp} °C`;
-          humidity.innerText = `${data.humidity} mg/L`;
+          temp.innerText = `${data.Temp} °C`;
+          humidity.innerText = `${data.Humidity} mg/L`;
           // console.log("Latest data:", data);
         } catch (error) {
           console.error("Error fetching data:", error);
