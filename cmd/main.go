@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"io"
 	"log"
@@ -15,33 +14,44 @@ var (
 )
 
 type Data struct {
-	Temp float64
-	Humidity float64
-	UltraSonicData float64
+	Temp          float64 `json:"temp"`
+	Humidity      float64 `json:"humidity"`
+	UltraSonicData float64 `json:"ultra_sonic_data"`
 }
 
 func init() {
-	t, err = t.ParseGlob("templates/*.html")
+	t, err = template.ParseGlob("templates/*.html")
 	if err != nil {
-		return
+		log.Fatalf("Error parsing templates: %v", err)
 	}
 }
-func RenderTemplates(w http.ResponseWriter, page string) {
-	t.ExecuteTemplate(w, page, nil)
+
+func RenderTemplates(w http.ResponseWriter, page string, data interface{}) {
+	if err := t.ExecuteTemplate(w, page, data); err != nil {
+		http.Error(w, "Error rendering template", http.StatusInternalServerError)
+		log.Printf("Error rendering template %s: %v", page, err)
+	}
 }
+
+var latestData interface{}
 
 func Router() http.Handler {
 	mux := http.NewServeMux()
 
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		RenderTemplates(w, "dashboard.html")
+		RenderTemplates(w, "dashboard.html", nil)
 	})
 
+
 	mux.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
-		// Check if the method is POST
+		if r.Method == http.MethodGet {
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(latestData)
+			return
+		}
 		if r.Method != http.MethodPost {
-			w.WriteHeader(http.StatusMethodNotAllowed) // 405 Method Not Allowed
+			w.WriteHeader(http.StatusMethodNotAllowed)
 			w.Header().Set("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(map[string]string{
 				"error": "Only POST method is allowed",
@@ -49,21 +59,26 @@ func Router() http.Handler {
 			return
 		}
 
+
 		body, err := io.ReadAll(r.Body)
 		if err != nil {
-			fmt.Println(err.Error())
+			http.Error(w, "Failed to read request body", http.StatusInternalServerError)
+			log.Printf("Error reading request body: %v", err)
+			return
 		}
-
 		defer r.Body.Close()
 
 		var data Data
-
-		if err = json.Unmarshal(body, &data); err != nil {
-			fmt.Println(err)
+		if err := json.Unmarshal(body, &data); err != nil {
+			http.Error(w, "Invalid JSON data", http.StatusBadRequest)
+			log.Printf("Error unmarshalling JSON: %v", err)
+			return
 		}
 
-		fmt.Println(data)
+		latestData = data
+		log.Printf("Received data: %+v", data)
 		w.WriteHeader(http.StatusOK)
+		// RenderTemplates(w, "dashboard.html", data)
 	})
 	return mux
 }
@@ -74,6 +89,6 @@ func main() {
 		Handler: Router(),
 	}
 
-	log.Println("Server running on http://localhost", server.Addr)
+	log.Printf("Server running on http://localhost%s", server.Addr)
 	log.Fatal(server.ListenAndServe())
 }
