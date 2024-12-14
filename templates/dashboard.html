@@ -387,10 +387,10 @@ nav {
   <main class="main-content">
     {{.}}
     <div class="dashboard-grid">
-      <div class="card metric-card">
-        <div class="metric-label">Water Temperature (Farm 1)</div>
+      <div class="card metric-card water">
+        <div class="metric-label">Water Temperature</div>
         <div class="metric-value" id="temp"></div>
-        <div><span class="status-indicator status-good"></span>Optimal</div>
+        <div id="display"></div>
       </div>
       
       <div class="card metric-card">
@@ -478,9 +478,10 @@ nav {
   </main>
 
   <script>
-    var temp = document.getElementById("temp");
-    var humidity = document.getElementById("humidity")
-    
+    const temp = document.getElementById("temp");
+   const display = document.getElementById("display")
+   const waterCard = document.querySelector(".water")
+   const text = document.querySelector(".metric-label")
     if (temp) {
       setInterval(async () => {
         try {
@@ -491,6 +492,19 @@ nav {
   
           const data = await response.json();
           // Assuming `temp` is a property of the JSON object
+          if (data.Temp < Number(24) || data.Temp > Number(29)) {
+              display.innerHTML = `<span class="status-indicator"></span>Danger`;
+              temp.style.color = "white";
+              waterCard.style.backgroundColor = `var(--danger)`;
+              waterCard.style.color = "white";
+              text.style.color = "white";
+          } else {
+              display.innerHTML = `<span class="status-indicator"></span>Good`;
+              waterCard.style.backgroundColor = `var(--success)`;
+              waterCard.style.color = "white";
+              text.style.color = "white";
+          }
+
           temp.innerText = `${data.Temp} °C`;
           humidity.innerText = `${data.Humidity} mg/L`;
           // console.log("Latest data:", data);
