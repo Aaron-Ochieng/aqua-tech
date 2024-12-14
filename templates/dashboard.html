@@ -385,16 +385,17 @@ nav {
   </aside>
 
   <main class="main-content">
+    {{.}}
     <div class="dashboard-grid">
       <div class="card metric-card">
         <div class="metric-label">Water Temperature (Farm 1)</div>
-        <div class="metric-value">25°C</div>
+        <div class="metric-value" id="temp"></div>
         <div><span class="status-indicator status-good"></span>Optimal</div>
       </div>
       
       <div class="card metric-card">
-        <div class="metric-label">Dissolved Oxygen</div>
-        <div class="metric-value">7.2 mg/L</div>
+        <div class="metric-label">Humidity</div>
+        <div class="metric-value" id="humidity"></div>
         <div><span class="status-indicator status-warning"></span>Monitor</div>
       </div>
       
@@ -477,88 +478,30 @@ nav {
   </main>
 
   <script>
-    // Temperature Chart
-    const tempCtx = document.getElementById('temperatureChart').getContext('2d');
-    new Chart(tempCtx, {
-      type: 'line',
-      data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        datasets: [{
-          label: 'Temperature (°C)',
-          data: [23, 24, 25, 26, 27, 28, 29, 28.5, 27, 26, 24, 23],
-          borderColor: '#0088cc',
-          tension: 0.4,
-          fill: false
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          title: {
-            display: true,
-            text: 'Annual Temperature Trends'
+    var temp = document.getElementById("temp");
+    var humidity = document.getElementById("humidity")
+    
+    if (temp) {
+      setInterval(async () => {
+        try {
+          const response = await fetch("http://localhost:8080/data");
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
           }
-        },
-        scales: {
-          y: {
-            min: 20,
-            max: 30,
-            ticks: {
-              stepSize: 2
-            }
-          }
+  
+          const data = await response.json();
+          // Assuming `temp` is a property of the JSON object
+          temp.innerText = `${data.temp} °C`;
+          humidity.innerText = `${data.humidity} mg/L`;
+          // console.log("Latest data:", data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
         }
-      }
-    });
-
-    // Water Quality Chart
-    const qualityCtx = document.getElementById('qualityChart').getContext('2d');
-    new Chart(qualityCtx, {
-      type: 'bar',
-      data: {
-        labels: ['pH', 'Dissolved Oxygen', 'Ammonia', 'Nitrates', 'Salinity', 'Turbidity'],
-        datasets: [{
-          label: 'Current Levels',
-          data: [7.2, 8.5, 0.02, 15, 32, 5],
-          backgroundColor: [
-            '#0088cc',
-            '#00a8e8',
-            '#ff6b6b',
-            '#2ecc71',
-            '#f1c40f',
-            '#9b59b6'
-          ]
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          title: {
-            display: true,
-            text: 'Water Quality Parameters'
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              callback: function(value, index, values) {
-                if (this.getLabelForValue(value).includes('pH')) return value;
-                return value + ' mg/L';
-              }
-            }
-          }
-        }
-      }
-    });
+      }, 2000); // Poll every 5 seconds
+    } else {
+      console.error('Element with id "temp" not found on the page.');
+    }
   </script>
+  
 
 </body></html>
