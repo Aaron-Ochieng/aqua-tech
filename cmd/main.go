@@ -59,6 +59,9 @@ func Router() http.Handler {
 	})
 
 	mux.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*") // Allow all origins
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		if r.Method == http.MethodGet {
 			w.Header().Set("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(latestData)
@@ -72,7 +75,6 @@ func Router() http.Handler {
 			})
 			return
 		}
-
 
 		body, err := io.ReadAll(r.Body)
 		if err != nil {
