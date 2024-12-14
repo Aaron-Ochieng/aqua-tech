@@ -39,14 +39,24 @@ func Router() http.Handler {
 	mux := http.NewServeMux()
 
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/dashboard", func(w http.ResponseWriter, r *http.Request) {
 		RenderTemplates(w, "dashboard.html", nil)
+
+	})
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "index.html", nil)
 	})
 	mux.HandleFunc("/farms", func(w http.ResponseWriter, r *http.Request) {
 		RenderTemplates(w, "farms.html", nil)
 	})
+	mux.HandleFunc("/manual-data", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "manual-data.html", nil)
+	})
 	mux.HandleFunc("/market", func(w http.ResponseWriter, r *http.Request) {
 		RenderTemplates(w, "marketplace.html", nil)
+	})
+	mux.HandleFunc("/features", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "features.html", nil)
 	})
 	mux.HandleFunc("/community", func(w http.ResponseWriter, r *http.Request) {
 		RenderTemplates(w, "community.html", nil)
@@ -57,7 +67,15 @@ func Router() http.Handler {
 	mux.HandleFunc("/education", func(w http.ResponseWriter, r *http.Request) {
 		RenderTemplates(w, "education.html", nil)
 	})
-
+	mux.HandleFunc("/analysis", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "analysis.html", nil)
+	})
+	mux.HandleFunc("/profile", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "profile.html", nil)
+	})
+	mux.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "login.html", nil)
+	})
 	mux.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*") // Allow all origins
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
