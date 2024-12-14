@@ -55,3 +55,25 @@ func TestSensorDataEndpointValidPost(t *testing.T) {
 		t.Errorf("Expected status OK, got %v", w.Result().StatusCode)
 	}
 }
+
+func TestSensorDataEndpointInvalidMethod(t *testing.T) {
+	mux := Router()
+
+	req := httptest.NewRequest(http.MethodGet, "/data", nil)
+	w := httptest.NewRecorder()
+
+	mux.ServeHTTP(w, req)
+
+	if w.Result().StatusCode != http.StatusMethodNotAllowed {
+		t.Errorf("Expected status Method Not Allowed, got %v", w.Result().StatusCode)
+	}
+
+	var response map[string]string
+	if err := json.NewDecoder(w.Body).Decode(&response); err != nil {
+		t.Fatalf("Failed to decode response: %v", err)
+	}
+
+	if response["error"] != "Only POST method is allowed" {
+		t.Errorf("Expected error message, got %v", response["error"])
+	}
+}
