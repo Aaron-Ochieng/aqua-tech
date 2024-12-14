@@ -2,7 +2,9 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"html/template"
+	"io"
 	"log"
 	"net/http"
 )
@@ -11,6 +13,12 @@ var (
 	t   *template.Template
 	err error
 )
+
+type Data struct {
+	Temp float64
+	Humidity float64
+	UltraSonicData float64
+}
 
 func init() {
 	t, err = t.ParseGlob("templates/*.html")
@@ -41,19 +49,21 @@ func Router() http.Handler {
 			return
 		}
 
-		// Example response payload
-		response := map[string]interface{}{
-			"message": "Data received successfully",
-			"status":  "success",
-			"data":    "Your payload goes here",
+		body, err := io.ReadAll(r.Body)
+		if err != nil {
+			fmt.Println(err.Error())
 		}
 
-		// Set response headers
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
+		defer r.Body.Close()
 
-		// Encode the response to JSON and send it
-		json.NewEncoder(w).Encode(response)
+		var data Data
+
+		if err = json.Unmarshal(body, &data); err != nil {
+			fmt.Println(err)
+		}
+
+		fmt.Println(data)
+		w.WriteHeader(http.StatusOK)
 	})
 	return mux
 }
