@@ -14,9 +14,9 @@ var (
 )
 
 type Data struct {
-	Temp          float64 `json:"temp"`
-	Humidity      float64 `json:"humidity"`
-	UltraSonicData float64 `json:"ultra_sonic_data"`
+	Temp           float64
+	Humidity       float64
+	UltraSonicData float64
 }
 
 func init() {
@@ -42,7 +42,21 @@ func Router() http.Handler {
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		RenderTemplates(w, "dashboard.html", nil)
 	})
-
+	mux.HandleFunc("/farms", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "farms.html")
+	})
+	mux.HandleFunc("/market", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "marketplace.html")
+	})
+	mux.HandleFunc("/community", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "community.html")
+	})
+	mux.HandleFunc("/reports", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "reports.html")
+	})
+	mux.HandleFunc("/education", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "education.html")
+	})
 
 	mux.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodGet {
