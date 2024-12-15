@@ -38,7 +38,7 @@ body {
         <path d="M16 8 C12 8 8 12 8 16 C8 20 12 24 16 24 C20 24 24 20 24 16" fill="none" stroke="#0088cc" stroke-width="2"></path>
         <circle cx="16" cy="16" r="4" fill="#0088cc"></circle>
       </svg>
-      AquaTech
+      AquaIoT
     </a>
 
     <div class="search-container">
@@ -244,7 +244,7 @@ body {
     if (temp) {
       setInterval(async () => {
         try {
-          const response = await fetch("http://localhost:8080/data");
+          const response = await fetch("https://aqua-tech-1.onrender.com/data");
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
