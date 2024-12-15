@@ -49,6 +49,10 @@ func Router() http.Handler {
 	mux.HandleFunc("/farms", func(w http.ResponseWriter, r *http.Request) {
 		RenderTemplates(w, "farms.html", nil)
 	})
+	mux.HandleFunc("/sign-up", func(w http.ResponseWriter, r *http.Request) {
+		RenderTemplates(w, "signUp.html", nil)
+	})
+
 	mux.HandleFunc("/manual-data", func(w http.ResponseWriter, r *http.Request) {
 		RenderTemplates(w, "manual-data.html", nil)
 	})
