@@ -232,7 +232,7 @@ body {
     if (temp) {
       setInterval(async () => {
         try {
-          const response = await fetch("https://aqua-tech-1.onrender.com/data");
+          const response = await fetch("/data");
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
@@ -255,6 +255,8 @@ body {
 
           temp.innerText = `${data.Temp} °C`;
           humidity.innerText = `${data.Humidity} mg/L`;
+          ph.innerText = `${data.Ph}`;
+          oxygen.innerText = `${data.Oxygen}`;
           // console.log("Latest data:", data);
         } catch (error) {
           console.error("Error fetching data:", error);

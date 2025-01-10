@@ -17,6 +17,8 @@ type Data struct {
 	Temp           float64
 	Humidity       float64
 	UltraSonicData float64
+	Ph             float64
+	Oxygen         float64
 }
 
 func init() {
