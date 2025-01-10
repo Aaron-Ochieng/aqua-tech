@@ -44,7 +44,7 @@ func Router() http.Handler {
 
 	})
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		RenderTemplates(w, "index.html", nil)
+		RenderTemplates(w, "login.html", nil)
 	})
 	mux.HandleFunc("/farms", func(w http.ResponseWriter, r *http.Request) {
 		RenderTemplates(w, "farms.html", nil)
