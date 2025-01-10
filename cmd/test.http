@@ -1,0 +1,10 @@
+POST http://localhost:8080/data
+Content-Type: application/json
+
+{
+    "Temp" :26,
+	"Humidity" : 24,
+	"UltraSonicData": 33,
+	"Ph": 6,
+	"Oxygen": 28
+}
